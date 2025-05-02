@@ -1,0 +1,104 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|c:\\users\\migue\\source\\repos\\enunciado_teste\\organizacaocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|solutionrelative:organizacaocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|c:\\users\\migue\\source\\repos\\enunciado_teste\\frmgereutilizadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|solutionrelative:frmgereutilizadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|c:\\users\\migue\\source\\repos\\enunciado_teste\\frmgereutilizadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|solutionrelative:frmgereutilizadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|c:\\users\\migue\\source\\repos\\enunciado_teste\\utilizadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|solutionrelative:utilizadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|c:\\users\\migue\\source\\repos\\enunciado_teste\\tarefa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40078359-763C-472D-9D7E-8C252267F6FC}|iTasks.csproj|solutionrelative:tarefa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrganizacaoContext.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\OrganizacaoContext.cs",
+              "RelativeDocumentMoniker": "OrganizacaoContext.cs",
+              "ToolTip": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\OrganizacaoContext.cs",
+              "RelativeToolTip": "OrganizacaoContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T11:23:04.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmGereUtilizadores.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\frmGereUtilizadores.cs",
+              "RelativeDocumentMoniker": "frmGereUtilizadores.cs",
+              "ToolTip": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\frmGereUtilizadores.cs",
+              "RelativeToolTip": "frmGereUtilizadores.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T11:18:20.416Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "frmGereUtilizadores.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\frmGereUtilizadores.cs",
+              "RelativeDocumentMoniker": "frmGereUtilizadores.cs",
+              "ToolTip": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\frmGereUtilizadores.cs [Design]",
+              "RelativeToolTip": "frmGereUtilizadores.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T11:18:03.326Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Tarefa.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\Tarefa.cs",
+              "RelativeDocumentMoniker": "Tarefa.cs",
+              "ToolTip": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\Tarefa.cs",
+              "RelativeToolTip": "Tarefa.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T10:57:02.844Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Utilizadores.cs",
+              "DocumentMoniker": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\Utilizadores.cs",
+              "RelativeDocumentMoniker": "Utilizadores.cs",
+              "ToolTip": "C:\\Users\\migue\\source\\repos\\enunciado_teste\\Utilizadores.cs",
+              "RelativeToolTip": "Utilizadores.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-02T10:39:55.846Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
