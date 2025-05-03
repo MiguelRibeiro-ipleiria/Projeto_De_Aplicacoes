@@ -11,7 +11,7 @@ namespace iTasks
 {
     class OrganizacaoContext : DbContext
     {
-        public DbSet<Utilizadores> Clientes { get; set; }
-        public DbSet<Tarefa> Carro { get; set; }
+        public DbSet<Utilizadores> Utilizadores { get; set; }
+        public DbSet<Tarefa> Tarefas { get; set; }
     }
 }

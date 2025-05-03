@@ -17,8 +17,24 @@ namespace iTasks
             InitializeComponent();
         }
 
+
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
+
+            int id = int.Parse(txtIdGestor.Text);
+            string nome = txtNomeGestor.Text;
+            string username = txtUsernameGestor.Text;
+            string pass = txtPasswordGestor.Text;
+            string departamento = cbDepartamento.Text;
+            bool gerirutilizadores = chkGereUtilizadores.Checked;
+
+            using (var db = new OrganizacaoContext())
+            {
+                var user = new Gestor(id, nome, username, pass, departamento, gerirutilizadores);
+                db.Utilizadores.Add(user);
+
+                db.SaveChanges();
+            }
 
         }
 
