@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iTasks.Controller;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,32 +16,24 @@ namespace iTasks
         public frmGereUtilizadores()
         {
             InitializeComponent();
+            cbDepartamento.Items.AddRange(Enum.GetNames(typeof(Departamento)));
         }
 
 
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
 
-            int id = int.Parse(txtIdGestor.Text);
             string nome = txtNomeGestor.Text;
             string username = txtUsernameGestor.Text;
             string pass = txtPasswordGestor.Text;
-            string departamento = cbDepartamento.Text;
+            string selectedText = cbDepartamento.SelectedItem.ToString();
+            Departamento departamento = (Departamento)Enum.Parse(typeof(Departamento), selectedText);
             bool gerirutilizadores = chkGereUtilizadores.Checked;
 
-            using (var db = new OrganizacaoContext())
-            {
-                var user = new Gestor(id, nome, username, pass, departamento, gerirutilizadores);
-                db.Utilizadores.Add(user);
-
-                db.SaveChanges();
-            }
+            var controller = new UsersController();
+            controller.AdicionarGestor(nome, username, pass, departamento, gerirutilizadores);
 
         }
 
-        private void btGravarProg_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
