@@ -13,6 +13,8 @@ namespace iTasks
     class OrganizacaoContext : DbContext
     {
         public DbSet<Utilizador> Utilizadores { get; set; }
+        public DbSet<Gestor> Gestores { get; set; }
+        public DbSet<Programador> Progamadores { get; set; }
         public DbSet<Tarefa> Tarefas { get; set; }
         public DbSet<TipoTarefa> TipoTarefa { get; set; }
     }

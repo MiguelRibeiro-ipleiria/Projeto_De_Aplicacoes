@@ -59,6 +59,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtNomeProg = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.btLimparGestor = new System.Windows.Forms.Button();
+            this.btLimparProg = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -135,9 +137,11 @@
             this.lstListaGestores.Name = "lstListaGestores";
             this.lstListaGestores.Size = new System.Drawing.Size(357, 537);
             this.lstListaGestores.TabIndex = 0;
+            this.lstListaGestores.SelectedIndexChanged += new System.EventHandler(this.lstListaGestores_SelectedIndexChanged);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btLimparGestor);
             this.groupBox2.Controls.Add(this.chkGereUtilizadores);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.btGravarGestor);
@@ -228,6 +232,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btLimparProg);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.cbGestorProg);
             this.groupBox3.Controls.Add(this.label6);
@@ -358,6 +363,7 @@
             this.lstListaProgramadores.Name = "lstListaProgramadores";
             this.lstListaProgramadores.Size = new System.Drawing.Size(357, 537);
             this.lstListaProgramadores.TabIndex = 0;
+            this.lstListaProgramadores.SelectedIndexChanged += new System.EventHandler(this.lstListaProgramadores_SelectedIndexChanged);
             // 
             // txtIdProg
             // 
@@ -395,6 +401,26 @@
             this.label10.Size = new System.Drawing.Size(47, 16);
             this.label10.TabIndex = 35;
             this.label10.Text = "Nome:";
+            // 
+            // btLimparGestor
+            // 
+            this.btLimparGestor.Location = new System.Drawing.Point(392, 384);
+            this.btLimparGestor.Name = "btLimparGestor";
+            this.btLimparGestor.Size = new System.Drawing.Size(268, 28);
+            this.btLimparGestor.TabIndex = 44;
+            this.btLimparGestor.Text = "Limpar Dados";
+            this.btLimparGestor.UseVisualStyleBackColor = true;
+            this.btLimparGestor.Click += new System.EventHandler(this.btLimparGestor_Click);
+            // 
+            // btLimparProg
+            // 
+            this.btLimparProg.Location = new System.Drawing.Point(392, 383);
+            this.btLimparProg.Name = "btLimparProg";
+            this.btLimparProg.Size = new System.Drawing.Size(268, 28);
+            this.btLimparProg.TabIndex = 45;
+            this.btLimparProg.Text = "Limpar Dados";
+            this.btLimparProg.UseVisualStyleBackColor = true;
+            this.btLimparProg.Click += new System.EventHandler(this.btLimparProg_Click);
             // 
             // frmGereUtilizadores
             // 
@@ -449,5 +475,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cbGestorProg;
+        private System.Windows.Forms.Button btLimparGestor;
+        private System.Windows.Forms.Button btLimparProg;
     }
 }

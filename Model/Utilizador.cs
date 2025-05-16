@@ -36,7 +36,10 @@ namespace iTasks
         public Departamento Departamento { get; set; }
         public bool GereUtilizadores { get; set; }
 
-
+        public override string ToString()
+        {
+            return $"{Nome} - {Departamento}";
+        }
 
     }
 
@@ -45,6 +48,12 @@ namespace iTasks
         public NivelExperiencia NivelExperiencia { get; set; }
         public Gestor Gestor { get; set; }
 
+        public override string ToString()
+        {
+            return $"{Nome}";
+        }
+
     }
-    
+
+
 }
