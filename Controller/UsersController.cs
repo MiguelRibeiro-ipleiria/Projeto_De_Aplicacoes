@@ -19,5 +19,16 @@ namespace iTasks.Controller
                 db.SaveChanges();
             }
         }
+
+        public void AdicionarProgramador(string nome, string username, string pass, NivelExperiencia nivelexperiencia, Gestor IdDoGestor)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var programador = new Programador { Nome = nome, Username = username, Password = pass, NivelExperiencia = nivelexperiencia, Gestor = IdDoGestor };
+                db.Utilizadores.Add(programador);
+
+                db.SaveChanges();
+            }
+        }
     }
 }

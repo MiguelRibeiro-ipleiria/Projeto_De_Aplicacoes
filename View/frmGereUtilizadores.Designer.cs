@@ -288,7 +288,9 @@
             this.btGravarProg.Size = new System.Drawing.Size(268, 28);
             this.btGravarProg.TabIndex = 37;
             this.btGravarProg.Text = "Gravar Dados";
-            this.btGravarProg.UseVisualStyleBackColor = true;            // 
+            this.btGravarProg.UseVisualStyleBackColor = true;
+            this.btGravarProg.Click += new System.EventHandler(this.btGravarProg_Click);
+            // 
             // txtPasswordProg
             // 
             this.txtPasswordProg.Location = new System.Drawing.Point(392, 196);

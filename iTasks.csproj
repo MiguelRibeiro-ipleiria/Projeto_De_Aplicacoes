@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\UsersController.cs" />
+    <Compile Include="Model\TipoTarefa.cs" />
     <Compile Include="View\frmConsultarTarefasConcluidas.cs">
       <SubType>Form</SubType>
     </Compile>

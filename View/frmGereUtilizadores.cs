@@ -17,6 +17,8 @@ namespace iTasks
         {
             InitializeComponent();
             cbDepartamento.Items.AddRange(Enum.GetNames(typeof(Departamento)));
+            cbNivelProg.Items.AddRange(Enum.GetNames(typeof(NivelExperiencia)));
+
         }
 
 
@@ -35,5 +37,14 @@ namespace iTasks
 
         }
 
+        private void btGravarProg_Click(object sender, EventArgs e)
+        {
+            string nome = txtNomeProg.Text;
+            string username = txtUsernameProg.Text;
+            string pass = txtPasswordProg.Text;
+            string selectedText = cbNivelProg.SelectedItem.ToString();
+            NivelExperiencia NivelDeExperiencia = (NivelExperiencia)Enum.Parse(typeof(NivelExperiencia), selectedText);
+
+        }
     }
 }

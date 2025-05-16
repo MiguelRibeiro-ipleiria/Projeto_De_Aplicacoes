@@ -43,7 +43,7 @@ namespace iTasks
     public class Programador : Utilizador
     {
         public NivelExperiencia NivelExperiencia { get; set; }
-        public int IdGestor { get; set; }
+        public Gestor Gestor { get; set; }
 
     }
     
