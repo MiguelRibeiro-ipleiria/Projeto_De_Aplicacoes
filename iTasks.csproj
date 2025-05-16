@@ -56,7 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\DetalhesTarefa.cs" />
     <Compile Include="Controller\SelecionarUtilizadores.cs" />
+    <Compile Include="Controller\TipoTarefaController.cs" />
     <Compile Include="Controller\UsersController.cs" />
     <Compile Include="Model\TipoTarefa.cs" />
     <Compile Include="View\frmConsultarTarefasConcluidas.cs">

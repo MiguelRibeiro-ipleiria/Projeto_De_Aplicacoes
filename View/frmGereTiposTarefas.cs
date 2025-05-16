@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iTasks.Controller;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,28 @@ namespace iTasks
         public frmGereTiposTarefas()
         {
             InitializeComponent();
+            AtualizarLista();
+
+
+        }
+        public List<string> ListaTT = new List<string>();
+        private void AtualizarLista()
+        {
+
+            var controller = new TipoTarefaController();
+            ListaTT = controller.MostrarTipoTarefa();
+            lstLista.DataSource = ListaTT;
+        }
+        private void btGravar_Click(object sender, EventArgs e)
+        {
+            string descricao = txtDesc.Text;
+
+
+            var controller = new TipoTarefaController();
+            controller.AdicionarTipoTarefa(descricao);
+            AtualizarLista();
+
+
         }
     }
 }
