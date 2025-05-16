@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using iTasks.Model;
 
 namespace iTasks
 {
@@ -13,5 +14,6 @@ namespace iTasks
     {
         public DbSet<Utilizador> Utilizadores { get; set; }
         public DbSet<Tarefa> Tarefas { get; set; }
+        public DbSet<TipoTarefa> TipoTarefa { get; set; }
     }
 }
