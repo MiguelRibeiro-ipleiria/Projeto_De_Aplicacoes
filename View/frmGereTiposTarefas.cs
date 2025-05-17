@@ -1,4 +1,5 @@
 ﻿using iTasks.Controller;
+using iTasks.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,12 +21,13 @@ namespace iTasks
 
 
         }
-        public List<string> ListaTT = new List<string>();
+        public List<TipoTarefa> ListaTT = new List<TipoTarefa>();
         private void AtualizarLista()
         {
 
             var controller = new TipoTarefaController();
             ListaTT = controller.MostrarTipoTarefa();
+            lstLista.DataSource = null;
             lstLista.DataSource = ListaTT;
         }
         private void btGravar_Click(object sender, EventArgs e)

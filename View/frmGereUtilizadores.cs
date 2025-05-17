@@ -40,34 +40,44 @@ namespace iTasks
         }
 
 
-        private void btGravarGestor_Click(object sender, EventArgs e)
+        private bool CheckUsername(string username)
         {
-
-
             try
             {
-                string nome = txtNomeGestor.Text;
-                string username = txtUsernameGestor.Text;
-                string pass = txtPasswordGestor.Text;
-                string selectedText = cbDepartamento.SelectedItem.ToString();
-                Departamento departamento = (Departamento)Enum.Parse(typeof(Departamento), selectedText);
-                bool gerirutilizadores = chkGereUtilizadores.Checked;
-
-                bool usernameExiste = listagestores.Any(g => g.Username == username);
+                bool usernameExiste = listagestores.Any(g => g.Username == username) || listaprogramadores.Any(g => g.Username == username);
                 if (usernameExiste)
                 {
-                    throw new Exception("Username em uso!");
+                    return true; 
                 }
-
-                var controller = new UsersController();
-                controller.AdicionarGestor(nome, username, pass, departamento, gerirutilizadores);
+                return false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                return false;
             }
-    
+        }
 
+        private void btGravarGestor_Click(object sender, EventArgs e)
+        {
+
+            string nome = txtNomeGestor.Text;
+            string username = txtUsernameGestor.Text;
+            string pass = txtPasswordGestor.Text;
+            string selectedText = cbDepartamento.SelectedItem.ToString();
+            Departamento departamento = (Departamento)Enum.Parse(typeof(Departamento), selectedText);
+            bool gerirutilizadores = chkGereUtilizadores.Checked;
+
+            if(CheckUsername(username) == true)
+            {
+                MessageBox.Show("Username em uso!");
+            }
+            else
+            {
+                var controller = new UsersController();
+                controller.AdicionarGestor(nome, username, pass, departamento, gerirutilizadores);
+                AtualizarLista("Gestor");
+            }
 
         }
 
@@ -78,12 +88,18 @@ namespace iTasks
             string pass = txtPasswordProg.Text;
             string selectedNivelText = cbNivelProg.SelectedItem.ToString();
             NivelExperiencia NivelDeExperiencia = (NivelExperiencia)Enum.Parse(typeof(NivelExperiencia), selectedNivelText);
-            
             Gestor gestorselecionado = (Gestor)cbGestorProg.SelectedItem;
 
-            var controller = new UsersController();
-            controller.AdicionarProgramador(nome, username, pass, NivelDeExperiencia, gestorselecionado);
-
+            if (CheckUsername(username) == true)
+            {
+                MessageBox.Show("Username em uso!");
+            }
+            else
+            {
+                var controller = new UsersController();
+                controller.AdicionarProgramador(nome, username, pass, NivelDeExperiencia, gestorselecionado);
+                AtualizarLista("Programador");
+            }
         }
 
         private void lstListaGestores_SelectedIndexChanged(object sender, EventArgs e)
@@ -129,6 +145,27 @@ namespace iTasks
             txtUsernameProg.Text = "";
             cbNivelProg.Text = "";
             cbGestorProg.Text = "";
+        }
+
+        private void AtualizarLista(string utilizador)
+        {
+            var controller = new UsersController();
+            if(utilizador == "Gestor")
+            {
+                listagestores = controller.EnumararGestores();
+                lstListaGestores.DataSource = listagestores;
+                foreach (var gestores in listagestores)
+                {
+                    cbGestorProg.Items.Add(gestores);
+                }
+            }
+            else if(utilizador == "Programador")
+            {
+                listaprogramadores = controller.EnumararProgramadores();
+                lstListaProgramadores.DataSource = listaprogramadores;
+
+            }
+
         }
     }
 }

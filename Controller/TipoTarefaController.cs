@@ -20,14 +20,14 @@ namespace iTasks.Controller
             }
         }
 
-        public List<string> MostrarTipoTarefa()
+        public List<TipoTarefa> MostrarTipoTarefa()
         {
-            List<string> listaTT = new List<string>();
+            List<TipoTarefa> listaTT = new List<TipoTarefa>();
 
             using (var db = new OrganizacaoContext())
             {
 
-                var queryTipoTarefa = from Tipos in db.TipoTarefa select Tipos.Nome;
+                var queryTipoTarefa = from Tipos in db.TipoTarefa select Tipos;
 
                 foreach (var Tipos in queryTipoTarefa)
                 {
