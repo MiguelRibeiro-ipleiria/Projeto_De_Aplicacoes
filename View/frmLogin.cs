@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iTasks.Controller;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,24 @@ namespace iTasks
         public frmLogin()
         {
             InitializeComponent();
+        }
+
+        private void btLogin_Click(object sender, EventArgs e)
+        {
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+
+            var logincontroller = new LoginController();
+            bool islogged = logincontroller.Login(username, password);
+            if(islogged == true)
+            {
+                Infologged.Text = "LOGADO";
+            }
+            else
+            {
+                Infologged.Text = "DADOS INCORRETOS";
+            }
+
         }
     }
 }
