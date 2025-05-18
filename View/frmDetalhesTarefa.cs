@@ -41,6 +41,10 @@ namespace iTasks
 
             DateTime datainicio = dtInicio.Value;
             DateTime datafim = dtFim.Value;
+
+            txtDataRealini.Text = datainicio.ToString();
+            txtdataRealFim.Text = datafim.ToString();
+
             var tarefascontroller = new TarefasController();
             tarefascontroller.AdicionarTarefa(descricao, ordem, storypoints, tipotarefa, programador, datainicio, datafim);            
         }
