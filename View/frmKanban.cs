@@ -39,12 +39,25 @@ namespace iTasks
             lstDone.DataSource = null;
             lstDone.DataSource = ListaTarefasDone;
 
+            
             isGestor = kanbancontroller.RestricoesUtilizador(utilizador);
             if(isGestor != true)
             {
                 //Programador
                 utilizadoresToolStripMenuItem.Enabled = false;
                 btNova.Text = "Detalhes Tarefa";
+            }
+            else if(isGestor == true)
+            {
+                bool GereUtilizador = kanbancontroller.VerificarSeGereUtilizador(utilizador);
+                if(GereUtilizador != true)
+                {
+                    gerirUtilizadoresToolStripMenuItem.Enabled = false;
+                }
+                else
+                {
+                    gerirUtilizadoresToolStripMenuItem.Enabled = true;
+                }
             }
 
         }

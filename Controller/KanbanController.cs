@@ -135,5 +135,28 @@ namespace iTasks.Controller
 
             }
         }
+
+        public bool VerificarSeGereUtilizador(Utilizador utiizador)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                if(utiizador is Gestor gestor)
+                {
+                    if(gestor.GereUtilizadores == true)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("O utilizador não é um gestor.");
+                    return false;
+                }
+            }
+        }
     }
 }
