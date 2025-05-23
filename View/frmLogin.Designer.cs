@@ -49,7 +49,7 @@
             // txtUsername
             // 
             this.txtUsername.Location = new System.Drawing.Point(179, 48);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(183, 22);
             this.txtUsername.TabIndex = 1;
@@ -57,7 +57,7 @@
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(179, 91);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(183, 22);
             this.txtPassword.TabIndex = 3;
@@ -74,8 +74,8 @@
             // 
             // btLogin
             // 
-            this.btLogin.Location = new System.Drawing.Point(263, 137);
-            this.btLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btLogin.Location = new System.Drawing.Point(262, 153);
+            this.btLogin.Margin = new System.Windows.Forms.Padding(4);
             this.btLogin.Name = "btLogin";
             this.btLogin.Size = new System.Drawing.Size(100, 28);
             this.btLogin.TabIndex = 4;
@@ -86,11 +86,12 @@
             // Infologged
             // 
             this.Infologged.AutoSize = true;
-            this.Infologged.Location = new System.Drawing.Point(96, 13);
+            this.Infologged.BackColor = System.Drawing.Color.Transparent;
+            this.Infologged.ForeColor = System.Drawing.Color.Red;
+            this.Infologged.Location = new System.Drawing.Point(93, 126);
             this.Infologged.Name = "Infologged";
-            this.Infologged.Size = new System.Drawing.Size(44, 16);
+            this.Infologged.Size = new System.Drawing.Size(0, 16);
             this.Infologged.TabIndex = 5;
-            this.Infologged.Text = "label3";
             // 
             // frmLogin
             // 
@@ -103,7 +104,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtUsername);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmLogin";
             this.Text = "frmLogin";
             this.ResumeLayout(false);

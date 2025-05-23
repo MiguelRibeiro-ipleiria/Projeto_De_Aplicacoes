@@ -27,11 +27,18 @@ namespace iTasks
             bool islogged = logincontroller.Login(username, password);
             if(islogged == true)
             {
+                this.Hide();
+
+                Utilizador utilizadorlogado = logincontroller.UserLoggedInfo(username, password);
+
+                frmKanban frmKanban = new frmKanban(utilizadorlogado);
+                frmKanban.Show();
+
                 Infologged.Text = "LOGADO";
             }
             else
             {
-                Infologged.Text = "DADOS INCORRETOS";
+                Infologged.Text = "Dados Incorretos";
             }
 
         }

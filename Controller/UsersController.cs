@@ -1,6 +1,8 @@
-﻿using System;
+﻿using iTasks.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +23,14 @@ namespace iTasks.Controller
             }
         }
 
-        public void AdicionarProgramador(string nome, string username, string pass, NivelExperiencia nivelexperiencia, Gestor IdDoGestor)
+        public void AdicionarProgramador(string nome, string username, string pass, NivelExperiencia nivelexperiencia, Gestor Gestor)
         {
             using (var db = new OrganizacaoContext())
             {
-                var programador = new Programador{Nome = nome, Username = username, Password = pass, NivelExperiencia = nivelexperiencia,Gestor = IdDoGestor};
+                var programador = new Programador{Nome = nome, Username = username, Password = pass, NivelExperiencia = nivelexperiencia,Gestor = Gestor };
+
+                db.Gestores.Attach(Gestor);
+
 
                 db.Utilizadores.Add(programador);
                 db.SaveChanges();

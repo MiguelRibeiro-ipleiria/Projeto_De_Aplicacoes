@@ -28,5 +28,19 @@ namespace iTasks.Controller
 
             }
         }
+
+        public Utilizador UserLoggedInfo(string username, string password)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var queryLoggedInfoUtilizador = (from utilizador in db.Utilizadores
+                                                 where utilizador.Username == username && utilizador.Password == password
+                                                 select utilizador).FirstOrDefault();
+
+                return queryLoggedInfoUtilizador;
+            }
+        }
+
+
     }
 }

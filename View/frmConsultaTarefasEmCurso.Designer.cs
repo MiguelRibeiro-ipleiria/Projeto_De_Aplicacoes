@@ -28,38 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gvTarefasEmCurso = new System.Windows.Forms.DataGridView();
             this.btFechar = new System.Windows.Forms.Button();
+            this.tipoTarefaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvTarefasEmCurso)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoTarefaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // gvTarefasEmCurso
             // 
+            this.gvTarefasEmCurso.AutoGenerateColumns = false;
             this.gvTarefasEmCurso.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvTarefasEmCurso.Location = new System.Drawing.Point(12, 12);
+            this.gvTarefasEmCurso.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.nomeDataGridViewTextBoxColumn});
+            this.gvTarefasEmCurso.DataSource = this.tipoTarefaBindingSource;
+            this.gvTarefasEmCurso.Location = new System.Drawing.Point(16, 15);
+            this.gvTarefasEmCurso.Margin = new System.Windows.Forms.Padding(4);
             this.gvTarefasEmCurso.Name = "gvTarefasEmCurso";
-            this.gvTarefasEmCurso.Size = new System.Drawing.Size(1026, 395);
+            this.gvTarefasEmCurso.RowHeadersWidth = 51;
+            this.gvTarefasEmCurso.Size = new System.Drawing.Size(1368, 486);
             this.gvTarefasEmCurso.TabIndex = 0;
             // 
             // btFechar
             // 
-            this.btFechar.Location = new System.Drawing.Point(934, 415);
+            this.btFechar.Location = new System.Drawing.Point(1245, 511);
+            this.btFechar.Margin = new System.Windows.Forms.Padding(4);
             this.btFechar.Name = "btFechar";
-            this.btFechar.Size = new System.Drawing.Size(104, 23);
+            this.btFechar.Size = new System.Drawing.Size(139, 28);
             this.btFechar.TabIndex = 30;
             this.btFechar.Text = "Fechar";
             this.btFechar.UseVisualStyleBackColor = true;
             // 
+            // tipoTarefaBindingSource
+            // 
+            this.tipoTarefaBindingSource.DataSource = typeof(iTasks.Model.TipoTarefa);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // nomeDataGridViewTextBoxColumn
+            // 
+            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
+            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
+            this.nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            this.nomeDataGridViewTextBoxColumn.Width = 125;
+            // 
             // frmConsultaTarefasEmCurso
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1050, 450);
+            this.ClientSize = new System.Drawing.Size(1400, 554);
             this.Controls.Add(this.btFechar);
             this.Controls.Add(this.gvTarefasEmCurso);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmConsultaTarefasEmCurso";
             this.Text = "frmConsultaTarefasEmCurso";
             ((System.ComponentModel.ISupportInitialize)(this.gvTarefasEmCurso)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tipoTarefaBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -68,5 +103,8 @@
 
         private System.Windows.Forms.DataGridView gvTarefasEmCurso;
         private System.Windows.Forms.Button btFechar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource tipoTarefaBindingSource;
     }
 }

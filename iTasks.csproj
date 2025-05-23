@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\KanbanController.cs" />
     <Compile Include="Controller\TarefasController.cs" />
     <Compile Include="Controller\LoginController.cs" />
     <Compile Include="Controller\TipoTarefaController.cs" />
@@ -139,6 +140,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\iTasks.Model.TipoTarefa.datasource" />
+    <None Include="Properties\DataSources\Tarefa.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
