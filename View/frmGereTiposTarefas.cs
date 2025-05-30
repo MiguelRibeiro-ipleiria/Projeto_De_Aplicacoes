@@ -14,11 +14,12 @@ namespace iTasks
 {
     public partial class frmGereTiposTarefas : Form
     {
-        public frmGereTiposTarefas()
+        private Utilizador utilizador;
+        public frmGereTiposTarefas(Utilizador utilizador)
         {
             InitializeComponent();
             AtualizarLista();
-
+            this.utilizador = utilizador;
 
         }
         public List<TipoTarefa> ListaTT = new List<TipoTarefa>();
@@ -40,6 +41,13 @@ namespace iTasks
             AtualizarLista();
 
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmKanban frmKanban = new frmKanban(utilizador);
+            frmKanban.Show();
         }
     }
 }

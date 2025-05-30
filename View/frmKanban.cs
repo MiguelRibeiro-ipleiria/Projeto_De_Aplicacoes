@@ -88,7 +88,7 @@ namespace iTasks
         private void gerirTiposDeTarefasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmGereTiposTarefas frmgertipotarefas = new frmGereTiposTarefas();
+            frmGereTiposTarefas frmgertipotarefas = new frmGereTiposTarefas(utilizador);
             frmgertipotarefas.Show();
         }
 
