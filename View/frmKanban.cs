@@ -94,19 +94,35 @@ namespace iTasks
 
         private void btSetDoing_Click(object sender, EventArgs e)
         {
-            DateTime Datarealinicio = DateTime.Now;
-            var kanbancontroller = new KanbanController();
-            var tarefaselecionada = lstTodo.SelectedItem as Tarefa;
+            int contagem = 0;
+            foreach(var tarefas in ListaTarefasDoing)
+            {
+                if(tarefas.Programador.Id == utilizador.Id)
+                {
+                    contagem = contagem + 1;
+                }
+            }
+            if(contagem > 2)
+            {
+                MessageBox.Show("Não pode ter mais do que 2 tarefas a realizar ao mesmo tempo!");
+            }
+            else
+            {
+                DateTime Datarealinicio = DateTime.Now;
+                var kanbancontroller = new KanbanController();
+                var tarefaselecionada = lstTodo.SelectedItem as Tarefa;
 
-            kanbancontroller.AlterarEstadoTarefaDoing(tarefaselecionada, utilizador, Datarealinicio);
+                kanbancontroller.AlterarEstadoTarefaDoing(tarefaselecionada, utilizador, Datarealinicio);
 
-            ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
-            ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
+                ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
+                ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
 
-            lstTodo.DataSource = null;
-            lstTodo.DataSource = ListaTarefasToDo;
-            lstDoing.DataSource = null;
-            lstDoing.DataSource = ListaTarefasDoing;
+                lstTodo.DataSource = null;
+                lstTodo.DataSource = ListaTarefasToDo;
+                lstDoing.DataSource = null;
+                lstDoing.DataSource = ListaTarefasDoing;
+            }
+
         }
 
         private void btSetTodo_Click(object sender, EventArgs e)

@@ -187,5 +187,33 @@ namespace iTasks.Controller
                 }
             }
         }
+
+        public void QuantasListas(Tarefa tarefa, Utilizador utilizador, DateTime DataDeRealFim)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                if (utilizador.Id == tarefa.Programador.Id)
+                {
+                    var queryEstadoParaAlterar = (from tarefas in db.Tarefas
+                                                  where tarefas.Id == tarefa.Id
+                                                  select tarefas).FirstOrDefault();
+
+                    if (queryEstadoParaAlterar != null)
+                    {
+                        queryEstadoParaAlterar.EstadoAtual = EstadoAtual.Done;
+                        queryEstadoParaAlterar.DataRealFim = DataDeRealFim;
+
+                        db.SaveChanges();
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Esta tarefa não lhe pertence!");
+                }
+
+
+            }
+        }
     }
 }
