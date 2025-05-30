@@ -147,6 +147,7 @@ namespace iTasks.Controller
                                                   where tarefas.Id == tarefa.Id
                                                   select tarefas).FirstOrDefault();
 
+
                     if (queryEstadoParaAlterar != null)
                     {
                         queryEstadoParaAlterar.EstadoAtual = EstadoAtual.Done;
@@ -215,5 +216,54 @@ namespace iTasks.Controller
 
             }
         }
+
+        public Tarefa TarefaMenorOrdemDoUtilizadorNoTODO(Utilizador utilizador, Tarefa tarefaselecionada)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                if (utilizador.Id == tarefaselecionada.Programador.Id)
+                {
+                    var tarefaComMenorOrdem = (from tarefas in db.Tarefas
+                                               where tarefas.Programador.Id == utilizador.Id
+                                                     && tarefas.EstadoAtual == EstadoAtual.ToDo
+                                               orderby tarefas.OrdemExecucao
+                                               select tarefas).FirstOrDefault();
+
+                    return tarefaComMenorOrdem;
+                }
+                else
+                {
+                    MessageBox.Show("Não é o responsável pela Tarefa");
+                    return null;
+                }
+
+                
+            }
+        }
+
+        public Tarefa TarefaMenorOrdemDoUtilizadorNODOING(Utilizador utilizador, Tarefa tarefaselecionada)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                if (utilizador.Id == tarefaselecionada.Programador.Id)
+                {
+                    var tarefaComMenorOrdem = (from tarefas in db.Tarefas
+                                               where tarefas.Programador.Id == utilizador.Id
+                                                     && tarefas.EstadoAtual == EstadoAtual.Doing
+                                               orderby tarefas.OrdemExecucao
+                                               select tarefas).FirstOrDefault();
+
+                    return tarefaComMenorOrdem;
+                }
+                else
+                {
+                    MessageBox.Show("Não é o responsável pela Tarefa");
+                    return null;
+                }
+
+
+            }
+        }
+       
     }
 }

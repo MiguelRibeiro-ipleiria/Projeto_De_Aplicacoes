@@ -50,6 +50,7 @@
             this.btNova = new System.Windows.Forms.Button();
             this.label_NomeUser = new System.Windows.Forms.Label();
             this.btPrevisao = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -275,11 +276,21 @@
             this.btPrevisao.UseVisualStyleBackColor = true;
             this.btPrevisao.Click += new System.EventHandler(this.btPrevisao_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(450, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "label1";
+            // 
             // frmKanban
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1257, 661);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btPrevisao);
             this.Controls.Add(this.label_NomeUser);
             this.Controls.Add(this.btNova);
@@ -328,5 +339,6 @@
         private System.Windows.Forms.Button btNova;
         private System.Windows.Forms.Label label_NomeUser;
         private System.Windows.Forms.Button btPrevisao;
+        private System.Windows.Forms.Label label1;
     }
 }

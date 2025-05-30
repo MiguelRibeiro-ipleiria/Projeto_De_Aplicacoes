@@ -18,6 +18,7 @@ namespace iTasks.Controller
             {
                 var gestor = new Gestor{Nome = nome, Username = username,Password = pass,Departamento = departamento,GereUtilizadores = gerirutilizadores};
 
+                
                 db.Utilizadores.Add(gestor);
                 db.SaveChanges();
             }
@@ -29,7 +30,7 @@ namespace iTasks.Controller
             {
                 var programador = new Programador{Nome = nome, Username = username, Password = pass, NivelExperiencia = nivelexperiencia,Gestor = Gestor };
 
-                db.Gestores.Attach(Gestor);
+                db.Utilizadores.Attach(Gestor);
 
 
                 db.Utilizadores.Add(programador);

@@ -17,15 +17,6 @@ namespace iTasks
     {
         public bool isGestor;
 
-        /*
-            Este variavel permite-nos saber qual foi a forma com que o gestor/programador entraram na pagina DetalhesTarefa
-            para saber se damos set aos valores em null ou com os detalhes da tarefa selecionada e se estamos a alterar dados 
-            de uma tarefa ou simplesmente a criar uma nova.
-            true -> Metodo de Acesso a enviar a Tarefa e os detalhes
-            false -> Metodo de Acesso a enviar apenas um objeto Tarefa vazio
-         */
-        public bool MetodoDeAcessoAoDetalhes = false;
-
         public List<Tarefa> ListaTarefasToDo = new List<Tarefa>();
         public List<Tarefa> ListaTarefasDoing = new List<Tarefa>();
         public List<Tarefa> ListaTarefasDone = new List<Tarefa>();
@@ -83,7 +74,7 @@ namespace iTasks
             Tarefa NovaTarefa = new Tarefa();
 
             this.Hide();
-            frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, NovaTarefa/*, MetodoDeAcessoAoDetalhes = false*/);
+            frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, NovaTarefa);
             frmDetalhesTarefa.Show();
         }
 
@@ -103,25 +94,31 @@ namespace iTasks
 
         private void btSetDoing_Click(object sender, EventArgs e)
         {
-            int contagem = 0;
+            var kanbancontroller = new KanbanController();
+            var tarefaselecionada = lstTodo.SelectedItem as Tarefa;
+            int contagemDoing = 0;
+            Tarefa MenorOrdem = kanbancontroller.TarefaMenorOrdemDoUtilizadorNoTODO(utilizador, tarefaselecionada);
+            if(MenorOrdem == null)
+            {
+                return;
+            }
+
             foreach (var tarefas in ListaTarefasDoing)
             {
                 if (tarefas.Programador.Id == utilizador.Id)
                 {
-                    contagem++;
+                    contagemDoing++;
                 }
             }
 
-
-            if (contagem >= 2)
+            if (contagemDoing >= 2)
             {
-                MessageBox.Show("Não pode ter mais do que 2 tarefas a realizar ao mesmo tempo!");
+                MessageBox.Show("Não pode ter mais do que 2 tarefas em execução ao mesmo tempo!");
+                return;
             }
-            else
+            if (tarefaselecionada.OrdemExecucao == MenorOrdem.OrdemExecucao)
             {
                 DateTime Datarealinicio = DateTime.Now;
-                var kanbancontroller = new KanbanController();
-                var tarefaselecionada = lstTodo.SelectedItem as Tarefa;
 
                 kanbancontroller.AlterarEstadoTarefaDoing(tarefaselecionada, utilizador, Datarealinicio);
 
@@ -134,6 +131,11 @@ namespace iTasks
                 lstDoing.DataSource = ListaTarefasDoing;
 
             }
+            else
+            {
+                MessageBox.Show("Conclua outras tarefas para completar esta!");
+            }
+
 
         }
 
@@ -163,21 +165,28 @@ namespace iTasks
         private void btSetDone_Click(object sender, EventArgs e)
         {
             var kanbancontroller = new KanbanController();
-            var tarefaselecionada = lstDoing.SelectedItem as Tarefa;
+            var tarefaselecionada = lstDoing.SelectedItem as Tarefa;            
+            Tarefa MenorOrdem = kanbancontroller.TarefaMenorOrdemDoUtilizadorNODOING(utilizador, tarefaselecionada);
 
-            DateTime DataDeRealFim = DateTime.Now;
-            kanbancontroller.AlterarEstadoTarefaDone(tarefaselecionada, utilizador, DataDeRealFim);
+            if (tarefaselecionada.OrdemExecucao == MenorOrdem.OrdemExecucao)
+            {
+                DateTime DataDeRealFim = DateTime.Now;
+                kanbancontroller.AlterarEstadoTarefaDone(tarefaselecionada, utilizador, DataDeRealFim);
 
-           
-            ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
-            ListaTarefasDone = kanbancontroller.VerificarEstadoDone();
 
-            lstDone.DataSource = null;
-            lstDone.DataSource = ListaTarefasDone;
-            lstDoing.DataSource = null;
-            lstDoing.DataSource = ListaTarefasDoing;
+                ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
+                ListaTarefasDone = kanbancontroller.VerificarEstadoDone();
 
-            
+                lstDone.DataSource = null;
+                lstDone.DataSource = ListaTarefasDone;
+                lstDoing.DataSource = null;
+                lstDoing.DataSource = ListaTarefasDoing;
+            }
+            else
+            {
+                MessageBox.Show("Conclua outras tarefas para completar esta!");
+            }
+
         }
 
         private void lstTodo_DoubleClick(object sender, EventArgs e)
@@ -200,8 +209,9 @@ namespace iTasks
             var tarefaselecionada = lstbox.SelectedItem as Tarefa;
 
             this.Hide();
-            frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, tarefaselecionada/*, MetodoDeAcessoAoDetalhes = true*/);
+            frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, tarefaselecionada);
             frmDetalhesTarefa.Show();
         }
+
     }
 }

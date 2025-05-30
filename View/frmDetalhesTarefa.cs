@@ -48,27 +48,35 @@ namespace iTasks
             if (TarefaCriada(tarefa) == true)
             {
                 bool isprimo = tarefascontroller.VerificarStoryPrimo(storypoints);
-                bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
-                if (isprimo == true && iscorrectordem == true)
+                if (isprimo == true)
                 {
                     tarefascontroller.AlterarTarefa(tarefa, descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                    MessageBox.Show("Tarefa Alterada com Sucesso!");
                 }
                 else
                 {
-                    MessageBox.Show("ola, story points não são primos, são o chentric ahah");
+                    MessageBox.Show("Story Points incorretos!");
                 }
             }
             else
             {
                 bool isprimo = tarefascontroller.VerificarStoryPrimo(storypoints);
                 bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
-                if (isprimo == true && iscorrectordem == true)
+                if (isprimo == true)
                 {
-                    tarefascontroller.AdicionarTarefa(descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                    if(iscorrectordem == true)
+                    {
+                        tarefascontroller.AdicionarTarefa(descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                        MessageBox.Show("Tarefa Criada com Sucesso!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ordem já em uso!");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("ola, story points não são primos, são o chentric ahah");
+                    MessageBox.Show("Story Points incorretos!");
                 }
             }
         }
@@ -159,9 +167,9 @@ namespace iTasks
             if (!IsGestor)
             {
                 //É Programador
-                txtDesc.ReadOnly = true;
-                txtOrdem.ReadOnly = true;
-                txtStoryPoints.ReadOnly = true;
+                txtDesc.Enabled = false;
+                txtOrdem.Enabled = false;
+                txtStoryPoints.Enabled = false;
                 cbProgramador.Enabled = false;
                 cbTipoTarefa.Enabled = false;
                 dtFim.Enabled = false;
