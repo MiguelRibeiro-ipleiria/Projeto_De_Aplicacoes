@@ -87,7 +87,7 @@ namespace iTasks.Controller
             }
         }
 
-        public void AlterarEstadoTarefaDoing(Tarefa tarefa, Utilizador utilizador)
+        public void AlterarEstadoTarefaDoing(Tarefa tarefa, Utilizador utilizador, DateTime Datarealinicio)
         {
             using (var db = new OrganizacaoContext())
             {
@@ -100,6 +100,7 @@ namespace iTasks.Controller
                     if (queryEstadoParaAlterar != null)
                     {
                         queryEstadoParaAlterar.EstadoAtual = EstadoAtual.Doing;
+                        queryEstadoParaAlterar.DataRealInicio = Datarealinicio;
                         db.SaveChanges();
                     }
                 }
@@ -123,6 +124,34 @@ namespace iTasks.Controller
                     if (queryEstadoParaAlterar != null)
                     {
                         queryEstadoParaAlterar.EstadoAtual = EstadoAtual.ToDo;
+                        db.SaveChanges();
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Esta tarefa não lhe pertence!");
+                }
+
+
+            }
+        }
+
+        public void AlterarEstadoTarefaDone(Tarefa tarefa, Utilizador utilizador, DateTime DataDeRealFim)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                if (utilizador.Id == tarefa.Programador.Id)
+                {
+                    var queryEstadoParaAlterar = (from tarefas in db.Tarefas
+                                                  where tarefas.Id == tarefa.Id
+                                                  select tarefas).FirstOrDefault();
+
+                    if (queryEstadoParaAlterar != null)
+                    {
+                        queryEstadoParaAlterar.EstadoAtual = EstadoAtual.Done;
+                        queryEstadoParaAlterar.DataRealFim = DataDeRealFim;
+
                         db.SaveChanges();
                     }
 

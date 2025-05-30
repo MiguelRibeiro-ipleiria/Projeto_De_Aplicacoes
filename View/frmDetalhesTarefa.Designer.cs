@@ -95,6 +95,7 @@
             this.cbProgramador.Name = "cbProgramador";
             this.cbProgramador.Size = new System.Drawing.Size(413, 24);
             this.cbProgramador.TabIndex = 6;
+            this.cbProgramador.SelectedIndexChanged += new System.EventHandler(this.cbProgramador_SelectedIndexChanged);
             // 
             // txtOrdem
             // 

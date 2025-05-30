@@ -71,7 +71,7 @@ namespace iTasks
 
         private void btNova_Click(object sender, EventArgs e)
         {
-            var tarefaselecionada = lstTodo.SelectedItem as Tarefa;
+            var tarefaselecionada = lstDone.SelectedItem as Tarefa;
 
             this.Hide();
             frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, tarefaselecionada);
@@ -94,10 +94,11 @@ namespace iTasks
 
         private void btSetDoing_Click(object sender, EventArgs e)
         {
+            DateTime Datarealinicio = DateTime.Now;
             var kanbancontroller = new KanbanController();
             var tarefaselecionada = lstTodo.SelectedItem as Tarefa;
 
-            kanbancontroller.AlterarEstadoTarefaDoing(tarefaselecionada, utilizador);
+            kanbancontroller.AlterarEstadoTarefaDoing(tarefaselecionada, utilizador, Datarealinicio);
 
             ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
             ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
@@ -129,6 +130,26 @@ namespace iTasks
             this.Hide();
             frmLogin frmLogin = new frmLogin();
             frmLogin.Show();
+        }
+
+        private void btSetDone_Click(object sender, EventArgs e)
+        {
+            var kanbancontroller = new KanbanController();
+            var tarefaselecionada = lstDoing.SelectedItem as Tarefa;
+
+            DateTime DataDeRealFim = DateTime.Now;
+            kanbancontroller.AlterarEstadoTarefaDone(tarefaselecionada, utilizador, DataDeRealFim);
+
+           
+            ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
+            ListaTarefasDone = kanbancontroller.VerificarEstadoDone();
+
+            lstDone.DataSource = null;
+            lstDone.DataSource = ListaTarefasDone;
+            lstDoing.DataSource = null;
+            lstDoing.DataSource = ListaTarefasDoing;
+
+            
         }
     }
 }

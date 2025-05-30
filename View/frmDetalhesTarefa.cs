@@ -31,21 +31,32 @@ namespace iTasks
         private void btGravar_Click(object sender, EventArgs e)
         {
             string descricao = txtDesc.Text;
-            int ordem = int.Parse(txtOrdem.Text);
+
             int storypoints = int.Parse(txtStoryPoints.Text);
             TipoTarefa tipotarefa = (TipoTarefa)cbTipoTarefa.SelectedItem;
             Programador programador = (Programador)cbProgramador.SelectedItem;
             EstadoAtual estadoatual = EstadoAtual.ToDo;
-            DateTime DataDeCriacao = DateTime.Now.Date;
-
+            DateTime DataDeCriacao = DateTime.Now;
+            int ordemInc = int.Parse(txtOrdem.Text);
             DateTime datainicio = dtInicio.Value;
             DateTime datafim = dtFim.Value;
 
-            txtDataRealini.Text = datainicio.ToString();
-            txtdataRealFim.Text = datafim.ToString();
+            
 
             var tarefascontroller = new TarefasController();
-            tarefascontroller.AdicionarTarefa(descricao, ordem, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);            
+            
+            bool isprimo = tarefascontroller.VerificarStoryPrimo(storypoints);
+            bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
+            if (isprimo == true && iscorrectordem == true)
+            {
+                tarefascontroller.AdicionarTarefa(descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+            }
+            else
+            {
+                MessageBox.Show("ola, story points não são primos, são o chentric ahah");
+            }
+           
+            
         }
         private void btFechar_Click(object sender, EventArgs e)
         {
@@ -65,10 +76,10 @@ namespace iTasks
 
         private void InserirDadosNasCB()
         {
-            var userscontroller = new UsersController();
+            var tarefascontroller = new TarefasController();
             var tipotarefascontroller = new TipoTarefaController();
 
-            listaprogramadores = userscontroller.EnumararProgramadores();
+            listaprogramadores = tarefascontroller.EnumararProgramadoresdosUsers(utilizador);
             listatipotarefas = tipotarefascontroller.MostrarTipoTarefa();
 
             cbProgramador.DataSource = null;
@@ -103,5 +114,13 @@ namespace iTasks
 
 
 
+        private void cbProgramador_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Programador programador = (Programador)cbProgramador.SelectedItem;
+
+            var tarefascontroller = new TarefasController();
+            int ordemInc = tarefascontroller.IncrementarOrdem(programador);
+            txtOrdem.Text = ordemInc.ToString();
+        }
     }
 }
