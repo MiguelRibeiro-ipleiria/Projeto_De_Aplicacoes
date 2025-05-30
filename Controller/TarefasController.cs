@@ -27,6 +27,49 @@ namespace iTasks.Controller
             }
         }
 
+        public void AlterarTarefa(Tarefa tarefa, string descricao, int ordem, int storypoints, TipoTarefa tipotarefa, Programador programador, DateTime dataPrevistoInicio, DateTime dataPrevistoFim, EstadoAtual estadoatual, DateTime DatadeCriacao)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var queryAltarTarefa = (from tarefas in db.Tarefas
+                                              where tarefas.Id == tarefa.Id
+                                              select tarefas).FirstOrDefault();
+
+                if (queryAltarTarefa != null)
+                {
+                    queryAltarTarefa.Descricao = descricao;
+                    queryAltarTarefa.OrdemExecucao = ordem;
+                    queryAltarTarefa.StoryPoints = storypoints;
+                    queryAltarTarefa.TipoTarefa = tipotarefa;
+                    queryAltarTarefa.Programador = programador;
+                    queryAltarTarefa.DataPrevistoInicio = dataPrevistoInicio;
+                    queryAltarTarefa.DataPrevistoFim = dataPrevistoFim;
+
+                    db.SaveChanges();
+                }
+            }
+        }
+        
+
+        public bool IsTarefa(Tarefa tarefa)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var queryExisteTarefa = (from tarefas in db.Tarefas
+                                        where tarefas.Id == tarefa.Id
+                                        select tarefas);
+
+                if (queryExisteTarefa.Any())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+        }
 
         public List<Programador> EnumararProgramadoresdosUsers(Utilizador utilizador)
         {

@@ -17,10 +17,13 @@ namespace iTasks
         List<TipoTarefa> listatipotarefas = new List<TipoTarefa>();
         List<Programador> listaprogramadores = new List<Programador>();
         private Utilizador utilizador;
-        public frmDetalhesTarefa(Utilizador utilizador, Tarefa tarefa)
+        private Tarefa tarefa;
+
+        public frmDetalhesTarefa(Utilizador utilizador, Tarefa TarefaPassada)
         {
             InitializeComponent();
             this.utilizador = utilizador;
+            this.tarefa = TarefaPassada;
 
             InserirDadosNasCB();
             DetalhesTarefa(tarefa);
@@ -30,8 +33,9 @@ namespace iTasks
 
         private void btGravar_Click(object sender, EventArgs e)
         {
-            string descricao = txtDesc.Text;
+            var tarefascontroller = new TarefasController();
 
+            string descricao = txtDesc.Text;
             int storypoints = int.Parse(txtStoryPoints.Text);
             TipoTarefa tipotarefa = (TipoTarefa)cbTipoTarefa.SelectedItem;
             Programador programador = (Programador)cbProgramador.SelectedItem;
@@ -41,22 +45,32 @@ namespace iTasks
             DateTime datainicio = dtInicio.Value;
             DateTime datafim = dtFim.Value;
 
-            
-
-            var tarefascontroller = new TarefasController();
-            
-            bool isprimo = tarefascontroller.VerificarStoryPrimo(storypoints);
-            bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
-            if (isprimo == true && iscorrectordem == true)
+            if (TarefaCriada(tarefa) == true)
             {
-                tarefascontroller.AdicionarTarefa(descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                bool isprimo = tarefascontroller.VerificarStoryPrimo(storypoints);
+                bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
+                if (isprimo == true && iscorrectordem == true)
+                {
+                    tarefascontroller.AlterarTarefa(tarefa, descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                }
+                else
+                {
+                    MessageBox.Show("ola, story points não são primos, são o chentric ahah");
+                }
             }
             else
             {
-                MessageBox.Show("ola, story points não são primos, são o chentric ahah");
+                bool isprimo = tarefascontroller.VerificarStoryPrimo(storypoints);
+                bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
+                if (isprimo == true && iscorrectordem == true)
+                {
+                    tarefascontroller.AdicionarTarefa(descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                }
+                else
+                {
+                    MessageBox.Show("ola, story points não são primos, são o chentric ahah");
+                }
             }
-           
-            
         }
         private void btFechar_Click(object sender, EventArgs e)
         {
@@ -67,11 +81,55 @@ namespace iTasks
 
         private void DetalhesTarefa(Tarefa Tarefa)
         {
-            txtId.Text = Tarefa.Id.ToString();
-            txtEstado.Text = Tarefa.EstadoAtual.ToString();
-            txtDataCriacao.Text = Tarefa.DataCriacao.ToString();
-            txtDataRealini.Text = Tarefa.DataRealInicio.ToString();
-            txtdataRealFim.Text = Tarefa.DataRealFim.ToString();
+            if (TarefaCriada(Tarefa) == true)
+            {
+                btGravar.Text = "Alterar Dados";
+
+                txtOrdem.Text = Tarefa.OrdemExecucao.ToString();
+                txtStoryPoints.Text = Tarefa.StoryPoints.ToString();
+                txtDesc.Text = Tarefa.Descricao;
+                cbProgramador.Text = Tarefa.Programador.ToString();
+                cbTipoTarefa.Text = Tarefa.TipoTarefa.ToString();
+
+                txtId.Text = Tarefa.Id.ToString();
+                txtEstado.Text = Tarefa.EstadoAtual.ToString();
+                txtDataCriacao.Text = Tarefa.DataCriacao.ToString();
+                if (Tarefa.DataRealInicio == null)
+                {
+                    txtDataRealini.Text = "Dado Incompleto";
+                }
+                else
+                {
+                    txtDataRealini.Text = Tarefa.DataRealInicio.ToString();
+                }
+                if (Tarefa.DataRealFim == null)
+                {
+                    txtdataRealFim.Text = "Dado Incompleto";
+                }
+                else
+                {
+                    txtdataRealFim.Text = Tarefa.DataRealFim.ToString();
+                }
+            }
+            else
+            {
+                btGravar.Text = "Criar Dados";
+
+                txtOrdem.Text = null;
+                txtStoryPoints.Text = null;
+                txtDesc.Text = null;
+                cbProgramador.Text = null;
+                cbTipoTarefa.Text = null;
+                txtId.Text = null;
+                txtEstado.Text = null;
+                txtDataCriacao.Text = null;
+                txtDataRealini.Text = null;
+                txtdataRealFim.Text = null;
+
+                InserirDadosNasCB();
+            }
+
+           
         }
 
         private void InserirDadosNasCB()
@@ -101,9 +159,9 @@ namespace iTasks
             if (!IsGestor)
             {
                 //É Programador
-                txtDesc.Enabled = false;
-                txtOrdem.Enabled = false;
-                txtStoryPoints.Enabled = false;
+                txtDesc.ReadOnly = true;
+                txtOrdem.ReadOnly = true;
+                txtStoryPoints.ReadOnly = true;
                 cbProgramador.Enabled = false;
                 cbTipoTarefa.Enabled = false;
                 dtFim.Enabled = false;
@@ -111,16 +169,26 @@ namespace iTasks
                 btGravar.Enabled = false;
             }
         }
-
-
-
         private void cbProgramador_SelectedIndexChanged(object sender, EventArgs e)
         {
             Programador programador = (Programador)cbProgramador.SelectedItem;
 
+            if(programador == null)
+            {
+
+            }
+            else
+            {
+                var tarefascontroller = new TarefasController();
+                int ordemInc = tarefascontroller.IncrementarOrdem(programador);
+                txtOrdem.Text = ordemInc.ToString();
+            }
+        }
+
+        public bool TarefaCriada(Tarefa tarefa)
+        {
             var tarefascontroller = new TarefasController();
-            int ordemInc = tarefascontroller.IncrementarOrdem(programador);
-            txtOrdem.Text = ordemInc.ToString();
+            return tarefascontroller.IsTarefa(tarefa);
         }
     }
 }

@@ -16,6 +16,16 @@ namespace iTasks
     public partial class frmKanban : Form
     {
         public bool isGestor;
+
+        /*
+            Este variavel permite-nos saber qual foi a forma com que o gestor/programador entraram na pagina DetalhesTarefa
+            para saber se damos set aos valores em null ou com os detalhes da tarefa selecionada e se estamos a alterar dados 
+            de uma tarefa ou simplesmente a criar uma nova.
+            true -> Metodo de Acesso a enviar a Tarefa e os detalhes
+            false -> Metodo de Acesso a enviar apenas um objeto Tarefa vazio
+         */
+        public bool MetodoDeAcessoAoDetalhes = false;
+
         public List<Tarefa> ListaTarefasToDo = new List<Tarefa>();
         public List<Tarefa> ListaTarefasDoing = new List<Tarefa>();
         public List<Tarefa> ListaTarefasDone = new List<Tarefa>();
@@ -45,7 +55,6 @@ namespace iTasks
             {
                 //Programador
                 utilizadoresToolStripMenuItem.Enabled = false;
-                btNova.Text = "Detalhes Tarefa";
             }
             else if(isGestor == true)
             {
@@ -71,10 +80,10 @@ namespace iTasks
 
         private void btNova_Click(object sender, EventArgs e)
         {
-            var tarefaselecionada = lstDone.SelectedItem as Tarefa;
+            Tarefa NovaTarefa = new Tarefa();
 
             this.Hide();
-            frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, tarefaselecionada);
+            frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, NovaTarefa/*, MetodoDeAcessoAoDetalhes = false*/);
             frmDetalhesTarefa.Show();
         }
 
@@ -95,14 +104,16 @@ namespace iTasks
         private void btSetDoing_Click(object sender, EventArgs e)
         {
             int contagem = 0;
-            foreach(var tarefas in ListaTarefasDoing)
+            foreach (var tarefas in ListaTarefasDoing)
             {
-                if(tarefas.Programador.Id == utilizador.Id)
+                if (tarefas.Programador.Id == utilizador.Id)
                 {
-                    contagem = contagem + 1;
+                    contagem++;
                 }
             }
-            if(contagem > 2)
+
+
+            if (contagem >= 2)
             {
                 MessageBox.Show("Não pode ter mais do que 2 tarefas a realizar ao mesmo tempo!");
             }
@@ -121,6 +132,7 @@ namespace iTasks
                 lstTodo.DataSource = ListaTarefasToDo;
                 lstDoing.DataSource = null;
                 lstDoing.DataSource = ListaTarefasDoing;
+
             }
 
         }
@@ -166,6 +178,30 @@ namespace iTasks
             lstDoing.DataSource = ListaTarefasDoing;
 
             
+        }
+
+        private void lstTodo_DoubleClick(object sender, EventArgs e)
+        {
+            ExecutarDetalhesTarefa(lstTodo);
+        }
+
+        private void lstDoing_DoubleClick(object sender, EventArgs e)
+        {
+            ExecutarDetalhesTarefa(lstDoing);
+        }
+
+        private void lstDone_MouseClick(object sender, MouseEventArgs e)
+        {
+            ExecutarDetalhesTarefa(lstDone);
+        }
+
+        private void ExecutarDetalhesTarefa(ListBox lstbox)
+        {
+            var tarefaselecionada = lstbox.SelectedItem as Tarefa;
+
+            this.Hide();
+            frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, tarefaselecionada/*, MetodoDeAcessoAoDetalhes = true*/);
+            frmDetalhesTarefa.Show();
         }
     }
 }
