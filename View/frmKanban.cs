@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +48,7 @@ namespace iTasks
             {
                 //Programador
                 utilizadoresToolStripMenuItem.Enabled = false;
+                exportarParaCSVToolStripMenuItem.Enabled = false;
             }
             else if(isGestor == true)
             {
@@ -203,21 +206,20 @@ namespace iTasks
 
         }
 
-        private void lstTodo_DoubleClick(object sender, EventArgs e)
-        {
-            ExecutarDetalhesTarefa(lstTodo);
-        }
-
-        private void lstDoing_DoubleClick(object sender, EventArgs e)
-        {
-            ExecutarDetalhesTarefa(lstDoing);
-        }
-
-        private void lstDone_MouseClick(object sender, MouseEventArgs e)
+        private void lstDone_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ExecutarDetalhesTarefa(lstDone);
         }
 
+        private void lstDoing_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ExecutarDetalhesTarefa(lstDoing);
+        }
+
+        private void lstTodo_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            ExecutarDetalhesTarefa(lstTodo);
+        }
         private void ExecutarDetalhesTarefa(ListBox lstbox)
         {
             var tarefaselecionada = lstbox.SelectedItem as Tarefa;
@@ -227,5 +229,22 @@ namespace iTasks
             frmDetalhesTarefa.Show();
         }
 
+        private void exportarParaCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            FileStream TarefasDoneDados = new FileStream("C:/Users/migue/source/repos/PASTA DEFENITIVA DO PROJETO/Projeto_De_Aplicacoes/CSVDadosTaredasDone.csv", FileMode.Create, FileAccess.Write);
+            StreamWriter escrever_dados_tarefas_done = new StreamWriter(TarefasDoneDados);
+
+            escrever_dados_tarefas_done.WriteLine("Programador;Descricao;DataPrevistaInicio;DataPrevistaFim;TipoTarefa;DataRealInicio;DataRealFim");
+            foreach (var TarefasDone in ListaTarefasDone)
+            {
+                escrever_dados_tarefas_done.WriteLine(TarefasDone.Programador+";"+TarefasDone.Descricao+";"+TarefasDone.DataPrevistoInicio+";"+TarefasDone.DataPrevistoFim+";"+TarefasDone.TipoTarefa+";"+TarefasDone.DataRealInicio+";"+TarefasDone.DataRealFim+";");
+            }
+
+
+
+            escrever_dados_tarefas_done.Close();
+            TarefasDoneDados.Close();
+        }
     }
 }

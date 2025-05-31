@@ -66,7 +66,7 @@
             this.lstTodo.Name = "lstTodo";
             this.lstTodo.Size = new System.Drawing.Size(395, 516);
             this.lstTodo.TabIndex = 0;
-            this.lstTodo.DoubleClick += new System.EventHandler(this.lstTodo_DoubleClick);
+            this.lstTodo.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstTodo_MouseDoubleClick);
             // 
             // groupBox1
             // 
@@ -102,7 +102,7 @@
             this.lstDoing.Name = "lstDoing";
             this.lstDoing.Size = new System.Drawing.Size(395, 520);
             this.lstDoing.TabIndex = 0;
-            this.lstDoing.DoubleClick += new System.EventHandler(this.lstDoing_DoubleClick);
+            this.lstDoing.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstDoing_MouseDoubleClick);
             // 
             // groupBox3
             // 
@@ -126,7 +126,7 @@
             this.lstDone.Name = "lstDone";
             this.lstDone.Size = new System.Drawing.Size(395, 520);
             this.lstDone.TabIndex = 0;
-            this.lstDone.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lstDone_MouseClick);
+            this.lstDone.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lstDone_MouseDoubleClick);
             // 
             // menuStrip1
             // 
@@ -162,6 +162,7 @@
             this.exportarParaCSVToolStripMenuItem.Name = "exportarParaCSVToolStripMenuItem";
             this.exportarParaCSVToolStripMenuItem.Size = new System.Drawing.Size(338, 26);
             this.exportarParaCSVToolStripMenuItem.Text = "Exportar Tarefas Concluídas para CSV";
+            this.exportarParaCSVToolStripMenuItem.Click += new System.EventHandler(this.exportarParaCSVToolStripMenuItem_Click);
             // 
             // utilizadoresToolStripMenuItem
             // 

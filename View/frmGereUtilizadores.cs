@@ -167,5 +167,12 @@ namespace iTasks
             }
 
         }
+
+        private void button_Fechar_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmLogin frmLogin = new frmLogin();
+            frmLogin.Show();
+        }
     }
 }

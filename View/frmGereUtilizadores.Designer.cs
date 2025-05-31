@@ -36,6 +36,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lstListaGestores = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btLimparGestor = new System.Windows.Forms.Button();
             this.chkGereUtilizadores = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPasswordGestor = new System.Windows.Forms.TextBox();
@@ -44,6 +45,7 @@
             this.txtUsernameGestor = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btLimparProg = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.cbGestorProg = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -59,8 +61,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtNomeProg = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.btLimparGestor = new System.Windows.Forms.Button();
-            this.btLimparProg = new System.Windows.Forms.Button();
+            this.button_Fechar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -164,6 +165,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Gestores";
             // 
+            // btLimparGestor
+            // 
+            this.btLimparGestor.Location = new System.Drawing.Point(392, 384);
+            this.btLimparGestor.Name = "btLimparGestor";
+            this.btLimparGestor.Size = new System.Drawing.Size(268, 28);
+            this.btLimparGestor.TabIndex = 44;
+            this.btLimparGestor.Text = "Limpar Dados";
+            this.btLimparGestor.UseVisualStyleBackColor = true;
+            this.btLimparGestor.Click += new System.EventHandler(this.btLimparGestor_Click);
+            // 
             // chkGereUtilizadores
             // 
             this.chkGereUtilizadores.AutoSize = true;
@@ -232,6 +243,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.button_Fechar);
             this.groupBox3.Controls.Add(this.btLimparProg);
             this.groupBox3.Controls.Add(this.label11);
             this.groupBox3.Controls.Add(this.cbGestorProg);
@@ -255,6 +267,16 @@
             this.groupBox3.TabIndex = 39;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Programadores";
+            // 
+            // btLimparProg
+            // 
+            this.btLimparProg.Location = new System.Drawing.Point(392, 383);
+            this.btLimparProg.Name = "btLimparProg";
+            this.btLimparProg.Size = new System.Drawing.Size(268, 28);
+            this.btLimparProg.TabIndex = 45;
+            this.btLimparProg.Text = "Limpar Dados";
+            this.btLimparProg.UseVisualStyleBackColor = true;
+            this.btLimparProg.Click += new System.EventHandler(this.btLimparProg_Click);
             // 
             // label11
             // 
@@ -402,25 +424,15 @@
             this.label10.TabIndex = 35;
             this.label10.Text = "Nome:";
             // 
-            // btLimparGestor
+            // button_Fechar
             // 
-            this.btLimparGestor.Location = new System.Drawing.Point(392, 384);
-            this.btLimparGestor.Name = "btLimparGestor";
-            this.btLimparGestor.Size = new System.Drawing.Size(268, 28);
-            this.btLimparGestor.TabIndex = 44;
-            this.btLimparGestor.Text = "Limpar Dados";
-            this.btLimparGestor.UseVisualStyleBackColor = true;
-            this.btLimparGestor.Click += new System.EventHandler(this.btLimparGestor_Click);
-            // 
-            // btLimparProg
-            // 
-            this.btLimparProg.Location = new System.Drawing.Point(392, 383);
-            this.btLimparProg.Name = "btLimparProg";
-            this.btLimparProg.Size = new System.Drawing.Size(268, 28);
-            this.btLimparProg.TabIndex = 45;
-            this.btLimparProg.Text = "Limpar Dados";
-            this.btLimparProg.UseVisualStyleBackColor = true;
-            this.btLimparProg.Click += new System.EventHandler(this.btLimparProg_Click);
+            this.button_Fechar.Location = new System.Drawing.Point(580, 561);
+            this.button_Fechar.Name = "button_Fechar";
+            this.button_Fechar.Size = new System.Drawing.Size(101, 30);
+            this.button_Fechar.TabIndex = 46;
+            this.button_Fechar.Text = "Fechar";
+            this.button_Fechar.UseVisualStyleBackColor = true;
+            this.button_Fechar.Click += new System.EventHandler(this.button_Fechar_Click);
             // 
             // frmGereUtilizadores
             // 
@@ -477,5 +489,6 @@
         private System.Windows.Forms.ComboBox cbGestorProg;
         private System.Windows.Forms.Button btLimparGestor;
         private System.Windows.Forms.Button btLimparProg;
+        private System.Windows.Forms.Button button_Fechar;
     }
 }

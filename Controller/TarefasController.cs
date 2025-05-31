@@ -21,6 +21,8 @@ namespace iTasks.Controller
                 db.Progamadores.Attach(programador);
                 db.Gestores.Attach(programador.Gestor);
                 db.TipoTarefa.Attach(tipotarefa);
+                db.Utilizadores.Attach(programador.Gestor);
+                db.Utilizadores.Attach(programador);
 
                 db.Tarefas.Add(tarefa);
                 db.SaveChanges();
