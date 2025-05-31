@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -124,6 +125,7 @@ namespace iTasks.Controller
                     if (queryEstadoParaAlterar != null)
                     {
                         queryEstadoParaAlterar.EstadoAtual = EstadoAtual.ToDo;
+                        queryEstadoParaAlterar.DataRealInicio = null;
                         db.SaveChanges();
                     }
 
@@ -264,6 +266,30 @@ namespace iTasks.Controller
 
             }
         }
-       
+
+        public Tarefa TarefaMaiorOrdemDoUtilizadorNoDOING(Utilizador utilizador, Tarefa tarefaselecionada)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                if (utilizador.Id == tarefaselecionada.Programador.Id)
+                {
+                    var tarefaComMaiorOrdem = (from tarefas in db.Tarefas
+                                               where tarefas.Programador.Id == utilizador.Id
+                                                     && tarefas.EstadoAtual == EstadoAtual.Doing
+                                               orderby tarefas.OrdemExecucao descending
+                                               select tarefas).FirstOrDefault();
+
+                    return tarefaComMaiorOrdem;
+                }
+                else
+                {
+                    MessageBox.Show("Não é o responsável pela Tarefa");
+                    return null;
+                }
+
+
+            }
+        }
+
     }
 }

@@ -144,15 +144,29 @@ namespace iTasks
             var kanbancontroller = new KanbanController();
             var tarefaselecionada = lstDoing.SelectedItem as Tarefa;
 
-            kanbancontroller.AlterarEstadoTarefaToDo(tarefaselecionada, utilizador);
+            Tarefa MaiorOrdem = kanbancontroller.TarefaMaiorOrdemDoUtilizadorNoDOING(utilizador, tarefaselecionada);
+            if (MaiorOrdem == null)
+            {
+                return;
+            }
+            if (tarefaselecionada.OrdemExecucao == MaiorOrdem.OrdemExecucao)
+            {
+                kanbancontroller.AlterarEstadoTarefaToDo(tarefaselecionada, utilizador);
 
-            ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
-            ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
+                ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
+                ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
 
-            lstTodo.DataSource = null;
-            lstTodo.DataSource = ListaTarefasToDo;
-            lstDoing.DataSource = null;
-            lstDoing.DataSource = ListaTarefasDoing;
+                lstTodo.DataSource = null;
+                lstTodo.DataSource = ListaTarefasToDo;
+                lstDoing.DataSource = null;
+                lstDoing.DataSource = ListaTarefasDoing;
+
+            }
+            else
+            {
+                MessageBox.Show("Retire as tarefas com maior ordem primeiro!");
+            }
+
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
