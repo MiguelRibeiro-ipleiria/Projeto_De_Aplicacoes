@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,29 +30,47 @@ namespace iTasks.Controller
             }
         }
 
-        public void AlterarTarefa(Tarefa tarefa, string descricao, int ordem, int storypoints, TipoTarefa tipotarefa, Programador programador, DateTime dataPrevistoInicio, DateTime dataPrevistoFim, EstadoAtual estadoatual, DateTime DatadeCriacao)
+        public void AlterarTarefa(Tarefa tarefa, string descricao, int ordem, int storypoints,
+            TipoTarefa tipotarefa, Programador programador,
+            DateTime dataPrevistoInicio, DateTime dataPrevistoFim,
+            EstadoAtual estadoatual, DateTime DatadeCriacao)
         {
             using (var db = new OrganizacaoContext())
             {
-                var queryAltarTarefa = (from tarefas in db.Tarefas
-                                              where tarefas.Id == tarefa.Id
-                                              select tarefas).FirstOrDefault();
+                // Carrega a tarefa existente do banco, incluindo Programador e TipoTarefa
+                var tarefaDb = db.Tarefas
+                    .Include(t => t.Programador)
+                    .Include(t => t.TipoTarefa)
+                    .Include(t => t.Programador.Gestor)
+                    .FirstOrDefault(t => t.Id == tarefa.Id);
 
-                if (queryAltarTarefa != null)
-                {
-                    queryAltarTarefa.Descricao = descricao;
-                    queryAltarTarefa.OrdemExecucao = ordem;
-                    queryAltarTarefa.StoryPoints = storypoints;
-                    queryAltarTarefa.TipoTarefa = tipotarefa;
-                    queryAltarTarefa.Programador = programador;
-                    queryAltarTarefa.DataPrevistoInicio = dataPrevistoInicio;
-                    queryAltarTarefa.DataPrevistoFim = dataPrevistoFim;
+                if (tarefaDb == null)
+                    throw new Exception("Tarefa não encontrada.");
 
-                    db.SaveChanges();
-                }
+                // Atualiza apenas os campos da tarefa
+                tarefaDb.Descricao = descricao;
+                tarefaDb.OrdemExecucao = ordem;
+                tarefaDb.StoryPoints = storypoints;
+                tarefaDb.DataPrevistoInicio = dataPrevistoInicio;
+                tarefaDb.DataPrevistoFim = dataPrevistoFim;
+
+                // Carrega o Programador e TipoTarefa corretos do banco
+                var programadorDb = db.Progamadores.Find(programador.Id);
+                var tipoTarefaDb = db.TipoTarefa.Find(tipotarefa.Id);
+                var gestor = db.Gestores.Find(programador.Gestor.Id);
+
+                if (programadorDb == null || tipoTarefaDb == null || gestor == null)
+                    throw new Exception("Programador ou Tipo de Tarefa não encontrados.");
+
+                tarefaDb.Programador = programadorDb;
+                tarefaDb.TipoTarefa = tipoTarefaDb;
+                tarefaDb.Programador.Gestor = gestor;
+
+                db.SaveChanges();
             }
         }
-        
+
+
 
         public bool IsTarefa(Tarefa tarefa)
         {

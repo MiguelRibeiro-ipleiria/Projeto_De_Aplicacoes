@@ -49,6 +49,7 @@ namespace iTasks
                 //Programador
                 utilizadoresToolStripMenuItem.Enabled = false;
                 exportarParaCSVToolStripMenuItem.Enabled = false;
+                tarefasEmCursoToolStripMenuItem.Enabled = false;
             }
             else if(isGestor == true)
             {
@@ -67,9 +68,8 @@ namespace iTasks
 
         private void btPrevisao_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            frmConsultaTarefasEmCurso frmTarefasEmCurso = new frmConsultaTarefasEmCurso();
-            frmTarefasEmCurso.Show();
+            var kanbancontroller = new KanbanController();
+            kanbancontroller.TarefasCalculo(ListaTarefasDone);
         }
 
         private void btNova_Click(object sender, EventArgs e)
@@ -245,6 +245,20 @@ namespace iTasks
 
             escrever_dados_tarefas_done.Close();
             TarefasDoneDados.Close();
+        }
+
+        private void tarefasTerminadasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmConsultarTarefasConcluidas frmConcluidas = new frmConsultarTarefasConcluidas(utilizador);
+            frmConcluidas.Show();
+        }
+
+        private void tarefasEmCursoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmConsultaTarefasEmCurso frmEmCurso = new frmConsultaTarefasEmCurso(utilizador);
+            frmEmCurso.Show();
         }
     }
 }

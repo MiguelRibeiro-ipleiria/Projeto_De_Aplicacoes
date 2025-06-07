@@ -32,20 +32,13 @@
             this.gvTarefasEmCurso = new System.Windows.Forms.DataGridView();
             this.btFechar = new System.Windows.Forms.Button();
             this.tipoTarefaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nomeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gvTarefasEmCurso)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tipoTarefaBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // gvTarefasEmCurso
             // 
-            this.gvTarefasEmCurso.AutoGenerateColumns = false;
             this.gvTarefasEmCurso.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gvTarefasEmCurso.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.nomeDataGridViewTextBoxColumn});
-            this.gvTarefasEmCurso.DataSource = this.tipoTarefaBindingSource;
             this.gvTarefasEmCurso.Location = new System.Drawing.Point(16, 15);
             this.gvTarefasEmCurso.Margin = new System.Windows.Forms.Padding(4);
             this.gvTarefasEmCurso.Name = "gvTarefasEmCurso";
@@ -62,26 +55,11 @@
             this.btFechar.TabIndex = 30;
             this.btFechar.Text = "Fechar";
             this.btFechar.UseVisualStyleBackColor = true;
+            this.btFechar.Click += new System.EventHandler(this.btFechar_Click);
             // 
             // tipoTarefaBindingSource
             // 
             this.tipoTarefaBindingSource.DataSource = typeof(iTasks.Model.TipoTarefa);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            this.nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            this.nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            this.nomeDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            this.nomeDataGridViewTextBoxColumn.Width = 125;
             // 
             // frmConsultaTarefasEmCurso
             // 
@@ -103,8 +81,6 @@
 
         private System.Windows.Forms.DataGridView gvTarefasEmCurso;
         private System.Windows.Forms.Button btFechar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource tipoTarefaBindingSource;
     }
 }

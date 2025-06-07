@@ -291,5 +291,22 @@ namespace iTasks.Controller
             }
         }
 
+        public void TarefasCalculo (List<Tarefa> tarefasDone)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                double resultado = 0;
+                var TarefasAgrupadas = tarefasDone.GroupBy(Tarefa => (Tarefa.StoryPoints));
+
+                foreach(var tarefas in TarefasAgrupadas)
+                {
+                    foreach(var tarefa in tarefas)
+                    {
+                        TimeSpan tempo = (TimeSpan)(tarefa.DataRealFim - tarefa.DataRealInicio);
+                        resultado += tempo.TotalHours;
+                    }
+                }
+            }
+        }
     }
 }
