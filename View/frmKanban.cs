@@ -22,6 +22,8 @@ namespace iTasks
         public List<Tarefa> ListaTarefasToDo = new List<Tarefa>();
         public List<Tarefa> ListaTarefasDoing = new List<Tarefa>();
         public List<Tarefa> ListaTarefasDone = new List<Tarefa>();
+        Dictionary<string, double> SP_Tempo = new Dictionary<string, double>();
+
         private Utilizador utilizador;
         public frmKanban(Utilizador utilizador)
         {
@@ -68,8 +70,8 @@ namespace iTasks
 
         private void btPrevisao_Click(object sender, EventArgs e)
         {
-            var kanbancontroller = new KanbanController();
-            kanbancontroller.TarefasCalculo(ListaTarefasDone);
+            DetalhesTempoPorSP();
+
         }
 
         private void btNova_Click(object sender, EventArgs e)
@@ -260,5 +262,92 @@ namespace iTasks
             frmConsultaTarefasEmCurso frmEmCurso = new frmConsultaTarefasEmCurso(utilizador);
             frmEmCurso.Show();
         }
+
+        public void DetalhesTempoPorSP()
+        {
+            var kanbancontroller = new KanbanController();
+
+            var popup = new Form()
+            {
+                Width = 400,
+                Height = 230,
+                Text = "Detalhes de Tempo de Tarefas",
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false
+            };
+
+            var txtTempo = new TextBox()
+            {
+                Multiline = true,
+                Dock = DockStyle.Bottom,
+                Width = 350,
+                Height = 100,
+                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                ReadOnly = true,
+                BackColor = Color.WhiteSmoke,
+                ForeColor = Color.DimGray,
+                BorderStyle = BorderStyle.None,
+                ScrollBars = ScrollBars.Vertical,
+                Margin = new Padding(10),
+                TextAlign = HorizontalAlignment.Left,
+            };
+
+
+            var option1 = new ToolStripMenuItem("Horas");
+            var option2 = new ToolStripMenuItem("Minutos");
+            var option3 = new ToolStripMenuItem("Segundos");
+
+            var MenuTempo = new MenuStrip()
+            {
+                Width = 90,
+                Height = 35,
+            };
+
+            // Evento para "Horas"
+            option1.Click += (sender, e) =>
+            {
+                var SP_Tempo = kanbancontroller.TarefasCalculo(ListaTarefasDone, "horas");
+                txtTempo.Text = "";
+                foreach (var kv in SP_Tempo)
+                {
+                    txtTempo.Text += $"SP {kv.Key}: {kv.Value:F2} horas\n";
+                }
+            };
+
+            // Evento para "Minutos"
+            option2.Click += (sender, e) =>
+            {
+                var SP_Tempo = kanbancontroller.TarefasCalculo(ListaTarefasDone, "minutos");
+                txtTempo.Text = "";
+                foreach (var kv in SP_Tempo)
+                {
+                    txtTempo.Text += $"SP {kv.Key}: {kv.Value:F2} minutos\n\n";
+                }
+            };
+
+            // Evento para "Segundos"
+            option3.Click += (sender, e) =>
+            {
+                var SP_Tempo = kanbancontroller.TarefasCalculo(ListaTarefasDone, "segundos");
+                txtTempo.Text = "";
+                foreach (var kv in SP_Tempo)
+                {
+                    txtTempo.Text += $"SP {kv.Key}: {kv.Value:F2} segundos\n";
+                }
+            };
+
+            MenuTempo.Items.Add(option1);
+            MenuTempo.Items.Add(option2);
+            MenuTempo.Items.Add(option3);
+
+            popup.MainMenuStrip = MenuTempo;
+            popup.Controls.Add(MenuTempo);
+            popup.Controls.Add(txtTempo);
+
+            popup.ShowDialog();
+        }
+
     }
 }

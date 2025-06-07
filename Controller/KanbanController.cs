@@ -291,22 +291,43 @@ namespace iTasks.Controller
             }
         }
 
-        public void TarefasCalculo (List<Tarefa> tarefasDone)
+        public Dictionary<string, double> TarefasCalculo(List<Tarefa> tarefasDone, string opcao)
         {
             using (var db = new OrganizacaoContext())
             {
-                double resultado = 0;
                 var TarefasAgrupadas = tarefasDone.GroupBy(Tarefa => (Tarefa.StoryPoints));
+                double MediaTempo = 0.0;
+                Dictionary<string, double> SP_Horas = new Dictionary<string, double>();
 
-                foreach(var tarefas in TarefasAgrupadas)
+                foreach (var TarefasGrupo in TarefasAgrupadas)
                 {
-                    foreach(var tarefa in tarefas)
+                    double totalHoras = 0;
+
+                    foreach (var tarefa in TarefasGrupo)
                     {
-                        TimeSpan tempo = (TimeSpan)(tarefa.DataRealFim - tarefa.DataRealInicio);
-                        resultado += tempo.TotalHours;
+                        TimeSpan tempo = tarefa.DataRealFim.Value - tarefa.DataRealInicio.Value;
+                        if(opcao == "horas")
+                        {
+                            totalHoras += tempo.TotalHours;
+                        }
+                        else if (opcao == "minutos")
+                        {
+                            totalHoras += tempo.TotalMinutes;
+                        }
+                        else if (opcao == "segundos")
+                        {
+                            totalHoras += tempo.TotalSeconds;
+                        }
                     }
+
+                    MediaTempo = totalHoras / TarefasGrupo.Count();
+                    SP_Horas[TarefasGrupo.Key.ToString()] = MediaTempo;
                 }
+
+                return SP_Horas;
+
             }
         }
+
     }
 }
