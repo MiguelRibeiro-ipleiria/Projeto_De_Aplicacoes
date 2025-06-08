@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -291,13 +292,21 @@ namespace iTasks.Controller
             }
         }
 
-        public Dictionary<string, double> TarefasCalculo(List<Tarefa> tarefasDone, string opcao)
+        public Dictionary<string, double> TarefasCalculo(List<Tarefa> tarefasDone, List<Tarefa> tarefasTODO, string opcao)
         {
             using (var db = new OrganizacaoContext())
             {
-                var TarefasAgrupadas = tarefasDone.GroupBy(Tarefa => (Tarefa.StoryPoints));
                 double MediaTempo = 0.0;
                 Dictionary<string, double> SP_Horas = new Dictionary<string, double>();
+
+                var TarefasTODOAgrupadas = (from t in tarefasTODO
+                                       select t.StoryPoints).Distinct();
+
+                var TarefasAgrupadas = from tarefa in tarefasDone
+                                       where TarefasTODOAgrupadas.Contains(tarefa.StoryPoints)
+                                       group tarefa by tarefa.StoryPoints into grupo
+                                       select grupo;
+
 
                 foreach (var TarefasGrupo in TarefasAgrupadas)
                 {
