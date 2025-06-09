@@ -125,22 +125,18 @@ namespace iTasks.Controller
                 return false;
             }
         }
-
-        public bool VerificarStoryPrimo(int numero)
+        public bool VerificarNumeroFibonacci(int numero)
         {
-            if (numero <= 1) return false;
-            if (numero == 2) return true;
-            if (numero % 2 == 0) return false;
-
-            int limite = (int)Math.Sqrt(numero);
-            for (int i = 3; i <= limite; i += 2)
+            bool EhQuadradoPerfeito(int x)
             {
-                if (numero % i == 0)
-                    return false;
+                int s = (int)Math.Sqrt(x);
+                return s * s == x;
             }
 
-            return true;
+            return EhQuadradoPerfeito(5 * numero * numero + 4) ||
+                   EhQuadradoPerfeito(5 * numero * numero - 4);
         }
+
 
         public int IncrementarOrdem(Programador programador)
         {

@@ -47,7 +47,7 @@ namespace iTasks
 
             if (TarefaCriada(tarefa) == true)
             {
-                bool isprimo = tarefascontroller.VerificarStoryPrimo(storypoints);
+                bool isprimo = tarefascontroller.VerificarNumeroFibonacci(storypoints);
                 if (isprimo == true)
                 {
                     tarefascontroller.AlterarTarefa(tarefa, descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
@@ -60,7 +60,7 @@ namespace iTasks
             }
             else
             {
-                bool isprimo = tarefascontroller.VerificarStoryPrimo(storypoints);
+                bool isprimo = tarefascontroller.VerificarNumeroFibonacci(storypoints);
                 bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
                 if (isprimo == true)
                 {
