@@ -32,52 +32,70 @@ namespace iTasks
         }
 
         private void btGravar_Click(object sender, EventArgs e)
-        {
+        { 
+            textBox_Erros.Clear();
             var tarefascontroller = new TarefasController();
-
-            string descricao = txtDesc.Text;
-            int storypoints = int.Parse(txtStoryPoints.Text);
-            TipoTarefa tipotarefa = (TipoTarefa)cbTipoTarefa.SelectedItem;
-            Programador programador = (Programador)cbProgramador.SelectedItem;
-            EstadoAtual estadoatual = EstadoAtual.ToDo;
-            DateTime DataDeCriacao = DateTime.Now;
-            int ordemInc = int.Parse(txtOrdem.Text);
-            DateTime datainicio = dtInicio.Value;
-            DateTime datafim = dtFim.Value;
-
-            if (TarefaCriada(tarefa) == true)
+            try
             {
-                bool isprimo = tarefascontroller.VerificarNumeroFibonacci(storypoints);
-                if (isprimo == true)
+                string descricao = txtDesc.Text;
+                int storypoints = int.Parse(txtStoryPoints.Text);
+                TipoTarefa tipotarefa = (TipoTarefa)cbTipoTarefa.SelectedItem;
+                Programador programador = (Programador)cbProgramador.SelectedItem;
+                EstadoAtual estadoatual = EstadoAtual.ToDo;
+                DateTime DataDeCriacao = DateTime.Now;
+                int ordemInc = int.Parse(txtOrdem.Text);
+                DateTime datainicio = dtInicio.Value;
+                DateTime datafim = dtFim.Value;
+
+                if (TarefaCriada(tarefa) == true)
                 {
-                    tarefascontroller.AlterarTarefa(tarefa, descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
-                    MessageBox.Show("Tarefa Alterada com Sucesso!");
-                }
-                else
-                {
-                    MessageBox.Show("Story Points incorretos!");
-                }
-            }
-            else
-            {
-                bool isprimo = tarefascontroller.VerificarNumeroFibonacci(storypoints);
-                bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
-                if (isprimo == true)
-                {
-                    if(iscorrectordem == true)
+                    bool isfibonnaci = tarefascontroller.VerificarNumeroFibonacci(storypoints);
+                    if (isfibonnaci == true)
                     {
-                        tarefascontroller.AdicionarTarefa(descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
-                        MessageBox.Show("Tarefa Criada com Sucesso!");
+                        tarefascontroller.AlterarTarefa(tarefa, descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                        MessageBox.Show("Tarefa Alterada com Sucesso!");
                     }
                     else
                     {
-                        MessageBox.Show("Ordem já em uso!");
+                        textBox_Erros.AppendText("- StoryPoints incorretos (ex.: 1, 2, 3, 5, 8 ...)\n");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Story Points incorretos!");
+                    bool isfibonnaci = tarefascontroller.VerificarNumeroFibonacci(storypoints);
+                    bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
+                    if (isfibonnaci == true)
+                    {
+                        if (iscorrectordem == true)
+                        {
+                            if (datainicio <= datafim)
+                            {
+                                tarefascontroller.AdicionarTarefa(descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                                MessageBox.Show("Tarefa Criada com Sucesso!");
+                            }
+                            else
+                            {
+                                textBox_Erros.AppendText("- Data Inválida (A data de fim tem de ser maior que a de inicio)\n");
+                            }
+                        }
+                        else
+                        {
+                            textBox_Erros.AppendText("- Ordem em uso, altere a ordem da tarefa\n");
+                        }
+                    }
+                    else
+                    {
+                        textBox_Erros.AppendText("- StoryPoints incorretos (ex.: 1, 2, 3, 5, 8 ...)\n");
+                    }
                 }
+            }
+            catch (FormatException)
+            {
+                textBox_Erros.AppendText("- Preencha todos os dados\n");
+            }
+            catch (Exception ex)
+            {
+                textBox_Erros.AppendText("- Erro: " + ex.Message + "\n");
             }
         }
         private void btFechar_Click(object sender, EventArgs e)

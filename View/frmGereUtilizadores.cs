@@ -60,25 +60,40 @@ namespace iTasks
 
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
-
-            string nome = txtNomeGestor.Text;
-            string username = txtUsernameGestor.Text;
-            string pass = txtPasswordGestor.Text;
-            string selectedText = cbDepartamento.SelectedItem.ToString();
-            Departamento departamento = (Departamento)Enum.Parse(typeof(Departamento), selectedText);
-            bool gerirutilizadores = chkGereUtilizadores.Checked;
-
-            if(CheckUsername(username) == true)
+            label_erro_gestores.Text = "";
+            try
             {
-                MessageBox.Show("Username em uso!");
-            }
-            else
-            {
-                var controller = new UsersController();
-                controller.AdicionarGestor(nome, username, pass, departamento, gerirutilizadores);
-                AtualizarLista("Gestor");
-            }
+                string nome = txtNomeGestor.Text.Trim();
+                string username = txtUsernameGestor.Text.Trim();
+                string pass = txtPasswordGestor.Text.Trim();
 
+                if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass) || cbDepartamento.SelectedItem == null)
+                {
+                    label_erro_gestores.Text = "Preencha todos os campos";
+                    return;
+                }
+
+                string selectedText = cbDepartamento.SelectedItem.ToString();
+                Departamento departamento = (Departamento)Enum.Parse(typeof(Departamento), selectedText);
+                bool gerirutilizadores = chkGereUtilizadores.Checked;
+
+                if (CheckUsername(username))
+                {
+                    label_erro_gestores.Text = "Username em uso";
+                }
+                else
+                {
+                    var controller = new UsersController();
+                    controller.AdicionarGestor(nome, username, pass, departamento, gerirutilizadores);
+                    AtualizarLista("Gestor");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                label_erro_gestores.Text = "Erro: " + ex.Message;
+            }
         }
 
         private void btGravarProg_Click(object sender, EventArgs e)
@@ -174,5 +189,7 @@ namespace iTasks
             frmLogin frmLogin = new frmLogin();
             frmLogin.Show();
         }
+
+
     }
 }
