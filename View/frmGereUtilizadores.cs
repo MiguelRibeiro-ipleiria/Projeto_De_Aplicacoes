@@ -63,10 +63,10 @@ namespace iTasks
             label_erro_gestores.Text = "";
             try
             {
-                string nome = txtNomeGestor.Text.Trim();
-                string username = txtUsernameGestor.Text.Trim();
-                string pass = txtPasswordGestor.Text.Trim();
-
+                string nome = txtNomeGestor.Text;
+                string username = txtUsernameGestor.Text;
+                string pass = txtPasswordGestor.Text;
+                
                 if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass) || cbDepartamento.SelectedItem == null)
                 {
                     label_erro_gestores.Text = "Preencha todos os campos";
@@ -77,7 +77,7 @@ namespace iTasks
                 Departamento departamento = (Departamento)Enum.Parse(typeof(Departamento), selectedText);
                 bool gerirutilizadores = chkGereUtilizadores.Checked;
 
-                if (CheckUsername(username))
+                if (CheckUsername(username) == true)
                 {
                     label_erro_gestores.Text = "Username em uso";
                 }
@@ -98,22 +98,37 @@ namespace iTasks
 
         private void btGravarProg_Click(object sender, EventArgs e)
         {
-            string nome = txtNomeProg.Text;
-            string username = txtUsernameProg.Text;
-            string pass = txtPasswordProg.Text;
-            string selectedNivelText = cbNivelProg.SelectedItem.ToString();
-            NivelExperiencia NivelDeExperiencia = (NivelExperiencia)Enum.Parse(typeof(NivelExperiencia), selectedNivelText);
-            Gestor gestorselecionado = (Gestor)cbGestorProg.SelectedItem;
+            label_erro_programadores.Text = "";
+            try
+            {
+                string nome = txtNomeProg.Text;
+                string username = txtUsernameProg.Text;
+                string pass = txtPasswordProg.Text;
+                string selectedNivelText = cbNivelProg.SelectedItem.ToString();
+                NivelExperiencia NivelDeExperiencia = (NivelExperiencia)Enum.Parse(typeof(NivelExperiencia), selectedNivelText);
+                Gestor gestorselecionado = (Gestor)cbGestorProg.SelectedItem;
 
-            if (CheckUsername(username) == true)
-            {
-                MessageBox.Show("Username em uso!");
+                if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass))
+                {
+                    label_erro_programadores.Text = "Preencha todos os campos";
+                    return;
+                }
+
+                if (CheckUsername(username) == true)
+                {
+                    label_erro_programadores.Text = "Username em uso";
+
+                }
+                else
+                {
+                    var controller = new UsersController();
+                    controller.AdicionarProgramador(nome, username, pass, NivelDeExperiencia, gestorselecionado);
+                    AtualizarLista("Programador");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var controller = new UsersController();
-                controller.AdicionarProgramador(nome, username, pass, NivelDeExperiencia, gestorselecionado);
-                AtualizarLista("Programador");
+                label_erro_programadores.Text = "Erro: " + ex.Message;
             }
         }
 
@@ -189,7 +204,5 @@ namespace iTasks
             frmLogin frmLogin = new frmLogin();
             frmLogin.Show();
         }
-
-
     }
 }

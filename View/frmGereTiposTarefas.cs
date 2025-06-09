@@ -33,12 +33,20 @@ namespace iTasks
         }
         private void btGravar_Click(object sender, EventArgs e)
         {
+            label_descicao_erro.Text = "";
             string descricao = txtDesc.Text;
 
+            if (string.IsNullOrEmpty(descricao))
+            {
+                label_descicao_erro.Text = "Preencha o campo acima";
+            }
+            else
+            {
+                var controller = new TipoTarefaController();
+                controller.AdicionarTipoTarefa(descricao);
+                AtualizarLista();
+            }
 
-            var controller = new TipoTarefaController();
-            controller.AdicionarTipoTarefa(descricao);
-            AtualizarLista();
 
 
         }

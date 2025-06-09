@@ -36,6 +36,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lstListaGestores = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label_erro_gestores = new System.Windows.Forms.Label();
             this.btLimparGestor = new System.Windows.Forms.Button();
             this.chkGereUtilizadores = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,6 +46,7 @@
             this.txtUsernameGestor = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label_erro_programadores = new System.Windows.Forms.Label();
             this.button_Fechar = new System.Windows.Forms.Button();
             this.btLimparProg = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
@@ -62,7 +64,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtNomeProg = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.label_erro_gestores = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -156,6 +157,16 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Gestores";
             // 
+            // label_erro_gestores
+            // 
+            this.label_erro_gestores.AutoSize = true;
+            this.label_erro_gestores.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_erro_gestores.ForeColor = System.Drawing.Color.Red;
+            this.label_erro_gestores.Location = new System.Drawing.Point(291, 336);
+            this.label_erro_gestores.Name = "label_erro_gestores";
+            this.label_erro_gestores.Size = new System.Drawing.Size(0, 14);
+            this.label_erro_gestores.TabIndex = 47;
+            // 
             // btLimparGestor
             // 
             this.btLimparGestor.Location = new System.Drawing.Point(294, 311);
@@ -228,6 +239,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label_erro_programadores);
             this.groupBox3.Controls.Add(this.button_Fechar);
             this.groupBox3.Controls.Add(this.btLimparProg);
             this.groupBox3.Controls.Add(this.label11);
@@ -251,12 +263,22 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Programadores";
             // 
+            // label_erro_programadores
+            // 
+            this.label_erro_programadores.AutoSize = true;
+            this.label_erro_programadores.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_erro_programadores.ForeColor = System.Drawing.Color.Red;
+            this.label_erro_programadores.Location = new System.Drawing.Point(291, 336);
+            this.label_erro_programadores.Name = "label_erro_programadores";
+            this.label_erro_programadores.Size = new System.Drawing.Size(0, 14);
+            this.label_erro_programadores.TabIndex = 48;
+            // 
             // button_Fechar
             // 
-            this.button_Fechar.Location = new System.Drawing.Point(435, 456);
+            this.button_Fechar.Location = new System.Drawing.Point(430, 439);
             this.button_Fechar.Margin = new System.Windows.Forms.Padding(2);
             this.button_Fechar.Name = "button_Fechar";
-            this.button_Fechar.Size = new System.Drawing.Size(76, 24);
+            this.button_Fechar.Size = new System.Drawing.Size(76, 32);
             this.button_Fechar.TabIndex = 46;
             this.button_Fechar.Text = "Fechar";
             this.button_Fechar.UseVisualStyleBackColor = true;
@@ -402,16 +424,6 @@
             this.label10.TabIndex = 35;
             this.label10.Text = "Nome:";
             // 
-            // label_erro_gestores
-            // 
-            this.label_erro_gestores.AutoSize = true;
-            this.label_erro_gestores.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_erro_gestores.ForeColor = System.Drawing.Color.Red;
-            this.label_erro_gestores.Location = new System.Drawing.Point(291, 336);
-            this.label_erro_gestores.Name = "label_erro_gestores";
-            this.label_erro_gestores.Size = new System.Drawing.Size(0, 14);
-            this.label_erro_gestores.TabIndex = 47;
-            // 
             // frmGereUtilizadores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -468,5 +480,6 @@
         private System.Windows.Forms.Button btLimparProg;
         private System.Windows.Forms.Button button_Fechar;
         private System.Windows.Forms.Label label_erro_gestores;
+        private System.Windows.Forms.Label label_erro_programadores;
     }
 }

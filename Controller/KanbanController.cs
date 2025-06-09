@@ -194,101 +194,148 @@ namespace iTasks.Controller
 
         public void QuantasListas(Tarefa tarefa, Utilizador utilizador, DateTime DataDeRealFim)
         {
-            using (var db = new OrganizacaoContext())
+            try
             {
-                if (utilizador.Id == tarefa.Programador.Id)
+                using (var db = new OrganizacaoContext())
                 {
-                    var queryEstadoParaAlterar = (from tarefas in db.Tarefas
-                                                  where tarefas.Id == tarefa.Id
-                                                  select tarefas).FirstOrDefault();
-
-                    if (queryEstadoParaAlterar != null)
+                    if (utilizador.Id == tarefa.Programador.Id)
                     {
-                        queryEstadoParaAlterar.EstadoAtual = EstadoAtual.Done;
-                        queryEstadoParaAlterar.DataRealFim = DataDeRealFim;
+                        var queryEstadoParaAlterar = (from tarefas in db.Tarefas
+                                                      where tarefas.Id == tarefa.Id
+                                                      select tarefas).FirstOrDefault();
 
-                        db.SaveChanges();
+                        if (queryEstadoParaAlterar != null)
+                        {
+                            queryEstadoParaAlterar.EstadoAtual = EstadoAtual.Done;
+                            queryEstadoParaAlterar.DataRealFim = DataDeRealFim;
+
+                            db.SaveChanges();
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Esta tarefa não lhe pertence!");
                     }
 
-                }
-                else
-                {
-                    MessageBox.Show("Esta tarefa não lhe pertence!");
-                }
 
-
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: ", ex.Message);
             }
         }
 
         public Tarefa TarefaMenorOrdemDoUtilizadorNoTODO(Utilizador utilizador, Tarefa tarefaselecionada)
         {
-            using (var db = new OrganizacaoContext())
+            try
             {
-                if (utilizador.Id == tarefaselecionada.Programador.Id)
+                using (var db = new OrganizacaoContext())
                 {
-                    var tarefaComMenorOrdem = (from tarefas in db.Tarefas
-                                               where tarefas.Programador.Id == utilizador.Id
-                                                     && tarefas.EstadoAtual == EstadoAtual.ToDo
-                                               orderby tarefas.OrdemExecucao
-                                               select tarefas).FirstOrDefault();
+                    if (utilizador.Id == tarefaselecionada.Programador.Id)
+                    {
+                        var tarefaComMenorOrdem = (from tarefas in db.Tarefas
+                                                   where tarefas.Programador.Id == utilizador.Id
+                                                         && tarefas.EstadoAtual == EstadoAtual.ToDo
+                                                   orderby tarefas.OrdemExecucao
+                                                   select tarefas).FirstOrDefault();
 
-                    return tarefaComMenorOrdem;
-                }
-                else
-                {
-                    MessageBox.Show("Não é o responsável pela Tarefa");
-                    return null;
-                }
+                        return tarefaComMenorOrdem;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Não é o responsável pela Tarefa");
+                        return null;
+                    }
 
-                
+
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Selecione uma tarefa");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: ", ex.Message);
+                return null;
             }
         }
 
         public Tarefa TarefaMenorOrdemDoUtilizadorNODOING(Utilizador utilizador, Tarefa tarefaselecionada)
         {
-            using (var db = new OrganizacaoContext())
+            try
             {
-                if (utilizador.Id == tarefaselecionada.Programador.Id)
+                using (var db = new OrganizacaoContext())
                 {
-                    var tarefaComMenorOrdem = (from tarefas in db.Tarefas
-                                               where tarefas.Programador.Id == utilizador.Id
-                                                     && tarefas.EstadoAtual == EstadoAtual.Doing
-                                               orderby tarefas.OrdemExecucao
-                                               select tarefas).FirstOrDefault();
+                    if (utilizador.Id == tarefaselecionada.Programador.Id)
+                    {
+                        var tarefaComMenorOrdem = (from tarefas in db.Tarefas
+                                                   where tarefas.Programador.Id == utilizador.Id
+                                                         && tarefas.EstadoAtual == EstadoAtual.Doing
+                                                   orderby tarefas.OrdemExecucao
+                                                   select tarefas).FirstOrDefault();
 
-                    return tarefaComMenorOrdem;
+                        return tarefaComMenorOrdem;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Não é o responsável pela Tarefa");
+                        return null;
+                    }
+
+
                 }
-                else
-                {
-                    MessageBox.Show("Não é o responsável pela Tarefa");
-                    return null;
-                }
-
-
             }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Selecione uma tarefa");
+                return null;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Selecione uma tarefa");
+                return null;
+            }
+
         }
 
         public Tarefa TarefaMaiorOrdemDoUtilizadorNoDOING(Utilizador utilizador, Tarefa tarefaselecionada)
         {
-            using (var db = new OrganizacaoContext())
+            try
             {
-                if (utilizador.Id == tarefaselecionada.Programador.Id)
+                using (var db = new OrganizacaoContext())
                 {
-                    var tarefaComMaiorOrdem = (from tarefas in db.Tarefas
-                                               where tarefas.Programador.Id == utilizador.Id
-                                                     && tarefas.EstadoAtual == EstadoAtual.Doing
-                                               orderby tarefas.OrdemExecucao descending
-                                               select tarefas).FirstOrDefault();
+                    if (utilizador.Id == tarefaselecionada.Programador.Id)
+                    {
+                        var tarefaComMaiorOrdem = (from tarefas in db.Tarefas
+                                                   where tarefas.Programador.Id == utilizador.Id
+                                                         && tarefas.EstadoAtual == EstadoAtual.Doing
+                                                   orderby tarefas.OrdemExecucao descending
+                                                   select tarefas).FirstOrDefault();
 
-                    return tarefaComMaiorOrdem;
+                        return tarefaComMaiorOrdem;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Não é o responsável pela Tarefa");
+                        return null;
+                    }
+
+
                 }
-                else
-                {
-                    MessageBox.Show("Não é o responsável pela Tarefa");
-                    return null;
-                }
-
-
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Selecione uma tarefa");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro: ", ex.Message);
+                return null;
             }
         }
 
