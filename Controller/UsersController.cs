@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace iTasks.Controller
@@ -76,5 +77,37 @@ namespace iTasks.Controller
                 return listagestores;
             }
         }
+
+        public void EliminarGestor(Gestor gestor)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var ProgramadoresDoGestor = from programadores in db.Progamadores
+                                            where programadores.Gestor.Id == gestor.Id
+                                            select programadores;
+
+                foreach (var programador in ProgramadoresDoGestor)
+                {
+                    int IdProgramador = programador.Id;
+
+                    var TarefasDosProgramadores = from tarefas in db.Tarefas
+                                                  where tarefas.Programador.Id == IdProgramador
+                                                  select tarefas;
+
+                    db.Tarefas.RemoveRange(TarefasDosProgramadores);
+                    db.Progamadores.Remove(programador);
+                }
+
+                var gestorDb = db.Gestores.Find(gestor.Id);
+                if (gestorDb != null)
+                {
+                    db.Gestores.Remove(gestorDb);
+                }
+
+                MessageBox.Show("Eliminar o gestor requer remover todos os seus programadores e tarefas respetivas. Deseja continuar?");
+                db.SaveChanges();
+            }
+        }
+
     }
 }

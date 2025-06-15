@@ -204,5 +204,16 @@ namespace iTasks
             frmLogin frmLogin = new frmLogin();
             frmLogin.Show();
         }
+
+        private void Eliminar_Gestor_Click(object sender, EventArgs e)
+        {
+            var controller = new UsersController();
+            Gestor GestorSelecionado = lstListaGestores.SelectedItem as Gestor;
+            controller.EliminarGestor(GestorSelecionado);
+
+            listagestores = controller.EnumararGestores();
+            lstListaGestores.DataSource = null;
+            lstListaGestores.DataSource = listagestores;
+        }
     }
 }

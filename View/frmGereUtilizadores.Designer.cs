@@ -64,6 +64,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtNomeProg = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.Eliminar_Gestor = new System.Windows.Forms.Button();
+            this.Eliminar_Programador = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -135,6 +137,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.Eliminar_Gestor);
             this.groupBox2.Controls.Add(this.label_erro_gestores);
             this.groupBox2.Controls.Add(this.btLimparGestor);
             this.groupBox2.Controls.Add(this.chkGereUtilizadores);
@@ -239,6 +242,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.Eliminar_Programador);
             this.groupBox3.Controls.Add(this.label_erro_programadores);
             this.groupBox3.Controls.Add(this.button_Fechar);
             this.groupBox3.Controls.Add(this.btLimparProg);
@@ -424,6 +428,27 @@
             this.label10.TabIndex = 35;
             this.label10.Text = "Nome:";
             // 
+            // Eliminar_Gestor
+            // 
+            this.Eliminar_Gestor.Location = new System.Drawing.Point(294, 338);
+            this.Eliminar_Gestor.Margin = new System.Windows.Forms.Padding(2);
+            this.Eliminar_Gestor.Name = "Eliminar_Gestor";
+            this.Eliminar_Gestor.Size = new System.Drawing.Size(201, 23);
+            this.Eliminar_Gestor.TabIndex = 48;
+            this.Eliminar_Gestor.Text = "Eliminar Gestor";
+            this.Eliminar_Gestor.UseVisualStyleBackColor = true;
+            this.Eliminar_Gestor.Click += new System.EventHandler(this.Eliminar_Gestor_Click);
+            // 
+            // Eliminar_Programador
+            // 
+            this.Eliminar_Programador.Location = new System.Drawing.Point(294, 338);
+            this.Eliminar_Programador.Margin = new System.Windows.Forms.Padding(2);
+            this.Eliminar_Programador.Name = "Eliminar_Programador";
+            this.Eliminar_Programador.Size = new System.Drawing.Size(201, 23);
+            this.Eliminar_Programador.TabIndex = 49;
+            this.Eliminar_Programador.Text = "Eliminar Programador";
+            this.Eliminar_Programador.UseVisualStyleBackColor = true;
+            // 
             // frmGereUtilizadores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -481,5 +506,7 @@
         private System.Windows.Forms.Button button_Fechar;
         private System.Windows.Forms.Label label_erro_gestores;
         private System.Windows.Forms.Label label_erro_programadores;
+        private System.Windows.Forms.Button Eliminar_Gestor;
+        private System.Windows.Forms.Button Eliminar_Programador;
     }
 }
