@@ -134,25 +134,70 @@ namespace iTasks
 
         private void lstListaGestores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Gestor GestorSelecionado = lstListaGestores.SelectedItem as Gestor;
-            txtIdGestor.Text = GestorSelecionado.Id.ToString();
-            txtNomeGestor.Text = GestorSelecionado.Nome;
-            txtPasswordGestor.Text = GestorSelecionado.Password;
-            txtUsernameGestor.Text = GestorSelecionado.Username;
-            cbDepartamento.Text = GestorSelecionado.Departamento.ToString();
-            txtUsernameGestor.Text = GestorSelecionado.Username;
-            chkGereUtilizadores.Checked = GestorSelecionado.GereUtilizadores;
+            try
+            {
+                Gestor GestorSelecionado = lstListaGestores.SelectedItem as Gestor;
+                if(GestorSelecionado == null)
+                {
+                    lstListaGestores.ClearSelected();
+                    txtIdGestor.Clear();
+                    txtNomeGestor.Clear();
+                    txtPasswordGestor.Clear();
+                    txtUsernameGestor.Clear();
+                    cbDepartamento.SelectedIndex = -1;
+                    chkGereUtilizadores.Checked = false;
+                    return;
+                }
+                else
+                {
+                    txtIdGestor.Text = GestorSelecionado.Id.ToString();
+                    txtNomeGestor.Text = GestorSelecionado.Nome;
+                    txtPasswordGestor.Text = GestorSelecionado.Password;
+                    txtUsernameGestor.Text = GestorSelecionado.Username;
+                    cbDepartamento.Text = GestorSelecionado.Departamento.ToString();
+                    txtUsernameGestor.Text = GestorSelecionado.Username;
+                    chkGereUtilizadores.Checked = GestorSelecionado.GereUtilizadores;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocorreu um erro: " + ex.Message);
+            }
+
+
         }
 
         private void lstListaProgramadores_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Programador ProgramadorSelecionado = lstListaProgramadores.SelectedItem as Programador;
-            txtIdProg.Text = ProgramadorSelecionado.Id.ToString();
-            txtNomeProg.Text = ProgramadorSelecionado.Nome;
-            txtPasswordProg.Text = ProgramadorSelecionado.Password;
-            txtUsernameProg.Text = ProgramadorSelecionado.Username;
-            cbNivelProg.Text = ProgramadorSelecionado.NivelExperiencia.ToString();
-            cbGestorProg.Text = ProgramadorSelecionado.Gestor.ToString();
+            try
+            {
+                Programador ProgramadorSelecionado = lstListaProgramadores.SelectedItem as Programador;
+                if (ProgramadorSelecionado == null)
+                {
+                    lstListaGestores.ClearSelected();
+                    txtIdProg.Clear();
+                    txtNomeProg.Clear();
+                    txtPasswordProg.Clear();
+                    txtNomeProg.Clear();
+                    txtUsernameProg.Clear();
+                    cbNivelProg.SelectedIndex = -1;
+                    cbGestorProg.SelectedIndex = -1;
+                    return;
+                }
+                else
+                {
+                    txtIdProg.Text = ProgramadorSelecionado.Id.ToString();
+                    txtNomeProg.Text = ProgramadorSelecionado.Nome;
+                    txtPasswordProg.Text = ProgramadorSelecionado.Password;
+                    txtUsernameProg.Text = ProgramadorSelecionado.Username;
+                    cbNivelProg.Text = ProgramadorSelecionado.NivelExperiencia.ToString();
+                    cbGestorProg.Text = ProgramadorSelecionado.Gestor.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ocorreu um erro: " + ex.Message);
+            }
 
         }
 
@@ -214,6 +259,47 @@ namespace iTasks
             listagestores = controller.EnumararGestores();
             lstListaGestores.DataSource = null;
             lstListaGestores.DataSource = listagestores;
+
+            listaprogramadores = controller.EnumararProgramadores();
+            lstListaGestores.DataSource = null;
+            lstListaGestores.DataSource = listaprogramadores;
+            lstListaGestores.ClearSelected();
+            txtIdGestor.Clear();
+            txtNomeGestor.Clear();
+            txtPasswordGestor.Clear();
+            txtUsernameGestor.Clear();
+            cbDepartamento.SelectedIndex = -1;
+            chkGereUtilizadores.Checked = false;
+
+            lstListaGestores.ClearSelected();
+            txtIdProg.Clear();
+            txtNomeProg.Clear();
+            txtPasswordProg.Clear();
+            txtNomeProg.Clear();
+            txtUsernameProg.Clear();
+            cbNivelProg.SelectedIndex = -1;
+            cbGestorProg.SelectedIndex = -1;
+        }
+
+        private void Eliminar_Programador_Click(object sender, EventArgs e)
+        {
+            var controller = new UsersController();
+            Programador ProgramadorSelecionado = lstListaProgramadores.SelectedItem as Programador;
+            controller.EliminarProgramador(ProgramadorSelecionado);
+
+            listaprogramadores = controller.EnumararProgramadores();
+            lstListaProgramadores.DataSource = null;
+            lstListaProgramadores.DataSource = listaprogramadores;
+
+
+            lstListaProgramadores.ClearSelected();
+            txtIdProg.Clear();
+            txtNomeProg.Clear();
+            txtPasswordProg.Clear();
+            txtNomeProg.Clear();
+            txtUsernameProg.Clear();
+            cbNivelProg.SelectedIndex = -1;
+            cbGestorProg.SelectedIndex = -1;
         }
     }
 }

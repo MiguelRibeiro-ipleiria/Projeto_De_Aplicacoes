@@ -109,5 +109,24 @@ namespace iTasks.Controller
             }
         }
 
+        public void EliminarProgramador(Programador programador)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var TarefasDoProgramador = from tarefas in db.Tarefas
+                                            where tarefas.Programador.Id == programador.Id
+                                            select tarefas;
+
+                foreach (var tarefa in TarefasDoProgramador)
+                {
+                    db.Tarefas.Remove(tarefa);
+                }
+                db.Progamadores.Remove(programador);
+
+                MessageBox.Show("Eliminar o programador implica eliminar as suas respetivas tarefas. Deseja continuar?");
+                db.SaveChanges();
+            }
+        }
+
     }
 }
