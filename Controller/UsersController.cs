@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,6 @@ namespace iTasks.Controller
             }
         }
 
-        // Enumera todos os Gestores
         public List<Gestor> EnumararGestores()
         {
             List<Gestor> listagestores = new List<Gestor>();
@@ -101,10 +101,9 @@ namespace iTasks.Controller
                 var gestorDb = db.Gestores.Find(gestor.Id);
                 if (gestorDb != null)
                 {
-                    db.Gestores.Remove(gestorDb);
+                    db.Utilizadores.Remove(gestorDb);
                 }
 
-                MessageBox.Show("Eliminar o gestor requer remover todos os seus programadores e tarefas respetivas. Deseja continuar?");
                 db.SaveChanges();
             }
         }
@@ -121,12 +120,18 @@ namespace iTasks.Controller
                 {
                     db.Tarefas.Remove(tarefa);
                 }
-                db.Progamadores.Remove(programador);
 
-                MessageBox.Show("Eliminar o programador implica eliminar as suas respetivas tarefas. Deseja continuar?");
+                var programadorDb = db.Progamadores.Find(programador.Id);
+                if (programadorDb != null)
+                {
+                    db.Utilizadores.Remove(programadorDb);
+                }
+
                 db.SaveChanges();
             }
         }
+
+        
 
     }
 }

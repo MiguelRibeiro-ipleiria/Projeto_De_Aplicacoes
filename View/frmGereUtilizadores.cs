@@ -69,7 +69,7 @@ namespace iTasks
                 
                 if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass) || cbDepartamento.SelectedItem == null)
                 {
-                    label_erro_gestores.Text = "Preencha todos os campos";
+                    label_erro_gestores.Text = "Preencha todos os campos";  
                     return;
                 }
 
@@ -229,6 +229,7 @@ namespace iTasks
             {
                 listagestores = controller.EnumararGestores();
                 lstListaGestores.DataSource = listagestores;
+                cbGestorProg.Items.Clear();
                 foreach (var gestores in listagestores)
                 {
                     cbGestorProg.Items.Add(gestores);
@@ -252,54 +253,238 @@ namespace iTasks
 
         private void Eliminar_Gestor_Click(object sender, EventArgs e)
         {
-            var controller = new UsersController();
             Gestor GestorSelecionado = lstListaGestores.SelectedItem as Gestor;
-            controller.EliminarGestor(GestorSelecionado);
+            if(GestorSelecionado != null)
+            {
+                if (ValidGestorBox())
+                {
 
-            listagestores = controller.EnumararGestores();
-            lstListaGestores.DataSource = null;
-            lstListaGestores.DataSource = listagestores;
+                    var controller = new UsersController();
+                    controller.EliminarGestor(GestorSelecionado);
 
-            listaprogramadores = controller.EnumararProgramadores();
-            lstListaGestores.DataSource = null;
-            lstListaGestores.DataSource = listaprogramadores;
-            lstListaGestores.ClearSelected();
-            txtIdGestor.Clear();
-            txtNomeGestor.Clear();
-            txtPasswordGestor.Clear();
-            txtUsernameGestor.Clear();
-            cbDepartamento.SelectedIndex = -1;
-            chkGereUtilizadores.Checked = false;
+                    listagestores = controller.EnumararGestores();
+                    lstListaGestores.DataSource = null;
+                    lstListaGestores.DataSource = listagestores;
 
-            lstListaGestores.ClearSelected();
-            txtIdProg.Clear();
-            txtNomeProg.Clear();
-            txtPasswordProg.Clear();
-            txtNomeProg.Clear();
-            txtUsernameProg.Clear();
-            cbNivelProg.SelectedIndex = -1;
-            cbGestorProg.SelectedIndex = -1;
+                    listaprogramadores = controller.EnumararProgramadores();
+                    lstListaProgramadores.DataSource = null;
+                    lstListaProgramadores.DataSource = listaprogramadores;
+
+                    lstListaGestores.ClearSelected();
+                    txtIdGestor.Clear();
+                    txtNomeGestor.Clear();
+                    txtPasswordGestor.Clear();
+                    txtUsernameGestor.Clear();
+                    cbDepartamento.SelectedIndex = -1;
+                    chkGereUtilizadores.Checked = false;
+
+                    lstListaGestores.ClearSelected();
+                    txtIdProg.Clear();
+                    txtNomeProg.Clear();
+                    txtPasswordProg.Clear();
+                    txtNomeProg.Clear();
+                    txtUsernameProg.Clear();
+                    cbNivelProg.SelectedIndex = -1;
+                    cbGestorProg.SelectedIndex = -1;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nenhum Gestor selecionado");
+            }
         }
 
         private void Eliminar_Programador_Click(object sender, EventArgs e)
         {
-            var controller = new UsersController();
             Programador ProgramadorSelecionado = lstListaProgramadores.SelectedItem as Programador;
-            controller.EliminarProgramador(ProgramadorSelecionado);
+            if (ProgramadorSelecionado != null)
+            {
+                if (ValidProgramadorBox())
+                {
+                    var controller = new UsersController();
+                    controller.EliminarProgramador(ProgramadorSelecionado);
 
-            listaprogramadores = controller.EnumararProgramadores();
-            lstListaProgramadores.DataSource = null;
-            lstListaProgramadores.DataSource = listaprogramadores;
+                    listaprogramadores = controller.EnumararProgramadores();
+                    lstListaProgramadores.DataSource = null;
+                    lstListaProgramadores.DataSource = listaprogramadores;
 
 
-            lstListaProgramadores.ClearSelected();
-            txtIdProg.Clear();
-            txtNomeProg.Clear();
-            txtPasswordProg.Clear();
-            txtNomeProg.Clear();
-            txtUsernameProg.Clear();
-            cbNivelProg.SelectedIndex = -1;
-            cbGestorProg.SelectedIndex = -1;
+                    lstListaProgramadores.ClearSelected();
+                    txtIdProg.Clear();
+                    txtNomeProg.Clear();
+                    txtPasswordProg.Clear();
+                    txtNomeProg.Clear();
+                    txtUsernameProg.Clear();
+                    cbNivelProg.SelectedIndex = -1;
+                    cbGestorProg.SelectedIndex = -1;
+                }
+            }     
+            else
+            {
+                MessageBox.Show("Nenhum Programador selecionado");
+            }
+
         }
+
+        private bool ValidGestorBox()
+        {
+            var popup = new Form()
+            {
+                Width = 400,
+                Height = 200,
+                Text = "Eliminar Gestor",
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false,
+                AcceptButton = null,
+                CancelButton = null
+            };
+
+            var messageLabel = new Label()
+            {
+                Text = "Eliminar o gestor irá também eliminar todos os seus programadores e tarefas!",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Top,
+                Height = 60,
+                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                Padding = new Padding(10)
+            };
+
+            var avisalabel = new Label()
+            {
+                Text = "Deseja continuar?",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Top,
+                Height = 40,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold)
+            };
+
+            var buttonPanel = new FlowLayoutPanel()
+            {
+                FlowDirection = FlowDirection.RightToLeft,
+                Dock = DockStyle.Bottom,
+                Padding = new Padding(10),
+                Height = 60
+            };
+
+            var okButton = new Button()
+            {
+                Text = "Eliminar",
+                DialogResult = DialogResult.OK,
+                Width = 100,
+                Height = 35
+            };
+
+            var cancelButton = new Button()
+            {
+                Text = "Cancelar",
+                DialogResult = DialogResult.Cancel,
+                Width = 100,
+                Height = 35
+            };
+
+            buttonPanel.Controls.Add(okButton);
+            buttonPanel.Controls.Add(cancelButton);
+
+            popup.Controls.Add(buttonPanel);
+            popup.Controls.Add(avisalabel);
+            popup.Controls.Add(messageLabel);
+
+            popup.AcceptButton = okButton;
+            popup.CancelButton = cancelButton;
+
+            var result = popup.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool ValidProgramadorBox()
+        {
+            var popup = new Form()
+            {
+                Width = 400,
+                Height = 200,
+                Text = "Eliminar Programador",
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false,
+                AcceptButton = null,
+                CancelButton = null
+            };
+
+            var messageLabel = new Label()
+            {
+                Text = "Eliminar o programador irá também eliminar todas as suas tarefas!",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Top,
+                Height = 60,
+                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                Padding = new Padding(10)
+            };
+
+            var avisalabel = new Label()
+            {
+                Text = "Deseja continuar?",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Top,
+                Height = 40,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold)
+            };
+
+            var buttonPanel = new FlowLayoutPanel()
+            {
+                FlowDirection = FlowDirection.RightToLeft,
+                Dock = DockStyle.Bottom,
+                Padding = new Padding(10),
+                Height = 60
+            };
+
+            var okButton = new Button()
+            {
+                Text = "Eliminar",
+                DialogResult = DialogResult.OK,
+                Width = 100,
+                Height = 35
+            };
+
+            var cancelButton = new Button()
+            {
+                Text = "Cancelar",
+                DialogResult = DialogResult.Cancel,
+                Width = 100,
+                Height = 35
+            };
+
+            buttonPanel.Controls.Add(okButton);
+            buttonPanel.Controls.Add(cancelButton);
+
+            popup.Controls.Add(buttonPanel);
+            popup.Controls.Add(avisalabel);
+            popup.Controls.Add(messageLabel);
+
+            popup.AcceptButton = okButton;
+            popup.CancelButton = cancelButton;
+
+            var result = popup.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

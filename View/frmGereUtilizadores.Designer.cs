@@ -74,7 +74,7 @@
             // 
             // btGravarGestor
             // 
-            this.btGravarGestor.Location = new System.Drawing.Point(294, 282);
+            this.btGravarGestor.Location = new System.Drawing.Point(294, 300);
             this.btGravarGestor.Name = "btGravarGestor";
             this.btGravarGestor.Size = new System.Drawing.Size(201, 23);
             this.btGravarGestor.TabIndex = 37;
@@ -162,7 +162,7 @@
             // 
             // Eliminar_Gestor
             // 
-            this.Eliminar_Gestor.Location = new System.Drawing.Point(294, 338);
+            this.Eliminar_Gestor.Location = new System.Drawing.Point(294, 327);
             this.Eliminar_Gestor.Margin = new System.Windows.Forms.Padding(2);
             this.Eliminar_Gestor.Name = "Eliminar_Gestor";
             this.Eliminar_Gestor.Size = new System.Drawing.Size(201, 23);
@@ -176,14 +176,14 @@
             this.label_erro_gestores.AutoSize = true;
             this.label_erro_gestores.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_erro_gestores.ForeColor = System.Drawing.Color.Red;
-            this.label_erro_gestores.Location = new System.Drawing.Point(291, 336);
+            this.label_erro_gestores.Location = new System.Drawing.Point(291, 266);
             this.label_erro_gestores.Name = "label_erro_gestores";
             this.label_erro_gestores.Size = new System.Drawing.Size(0, 14);
             this.label_erro_gestores.TabIndex = 47;
             // 
             // btLimparGestor
             // 
-            this.btLimparGestor.Location = new System.Drawing.Point(294, 311);
+            this.btLimparGestor.Location = new System.Drawing.Point(294, 354);
             this.btLimparGestor.Margin = new System.Windows.Forms.Padding(2);
             this.btLimparGestor.Name = "btLimparGestor";
             this.btLimparGestor.Size = new System.Drawing.Size(201, 23);
@@ -280,7 +280,7 @@
             // 
             // Eliminar_Programador
             // 
-            this.Eliminar_Programador.Location = new System.Drawing.Point(294, 338);
+            this.Eliminar_Programador.Location = new System.Drawing.Point(294, 354);
             this.Eliminar_Programador.Margin = new System.Windows.Forms.Padding(2);
             this.Eliminar_Programador.Name = "Eliminar_Programador";
             this.Eliminar_Programador.Size = new System.Drawing.Size(201, 23);
@@ -294,7 +294,7 @@
             this.label_erro_programadores.AutoSize = true;
             this.label_erro_programadores.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_erro_programadores.ForeColor = System.Drawing.Color.Red;
-            this.label_erro_programadores.Location = new System.Drawing.Point(291, 336);
+            this.label_erro_programadores.Location = new System.Drawing.Point(291, 271);
             this.label_erro_programadores.Name = "label_erro_programadores";
             this.label_erro_programadores.Size = new System.Drawing.Size(0, 14);
             this.label_erro_programadores.TabIndex = 48;
@@ -312,7 +312,7 @@
             // 
             // btLimparProg
             // 
-            this.btLimparProg.Location = new System.Drawing.Point(294, 311);
+            this.btLimparProg.Location = new System.Drawing.Point(294, 327);
             this.btLimparProg.Margin = new System.Windows.Forms.Padding(2);
             this.btLimparProg.Name = "btLimparProg";
             this.btLimparProg.Size = new System.Drawing.Size(201, 23);
@@ -349,7 +349,7 @@
             // 
             // btGravarProg
             // 
-            this.btGravarProg.Location = new System.Drawing.Point(294, 283);
+            this.btGravarProg.Location = new System.Drawing.Point(294, 300);
             this.btGravarProg.Name = "btGravarProg";
             this.btGravarProg.Size = new System.Drawing.Size(201, 23);
             this.btGravarProg.TabIndex = 37;
