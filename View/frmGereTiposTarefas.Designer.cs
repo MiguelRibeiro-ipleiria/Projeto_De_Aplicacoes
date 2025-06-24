@@ -37,6 +37,8 @@
             this.btGravar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.label_descicao_erro = new System.Windows.Forms.Label();
+            this.btEliminar = new System.Windows.Forms.Button();
+            this.btnEditar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,11 +123,33 @@
             this.label_descicao_erro.Size = new System.Drawing.Size(0, 13);
             this.label_descicao_erro.TabIndex = 33;
             // 
+            // btEliminar
+            // 
+            this.btEliminar.Location = new System.Drawing.Point(577, 369);
+            this.btEliminar.Name = "btEliminar";
+            this.btEliminar.Size = new System.Drawing.Size(75, 23);
+            this.btEliminar.TabIndex = 34;
+            this.btEliminar.Text = "Eliminar";
+            this.btEliminar.UseVisualStyleBackColor = true;
+            this.btEliminar.Click += new System.EventHandler(this.btEliminar_Click);
+            // 
+            // btnEditar
+            // 
+            this.btnEditar.Location = new System.Drawing.Point(496, 369);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(75, 23);
+            this.btnEditar.TabIndex = 35;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
             // frmGereTiposTarefas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(664, 404);
+            this.Controls.Add(this.btnEditar);
+            this.Controls.Add(this.btEliminar);
             this.Controls.Add(this.label_descicao_erro);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btGravar);
@@ -153,5 +177,7 @@
         private System.Windows.Forms.Button btGravar;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label_descicao_erro;
+        private System.Windows.Forms.Button btEliminar;
+        private System.Windows.Forms.Button btnEditar;
     }
 }

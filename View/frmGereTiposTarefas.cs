@@ -14,15 +14,28 @@ namespace iTasks
 {
     public partial class frmGereTiposTarefas : Form
     {
+        public List<TipoTarefa> ListaTT = new List<TipoTarefa>();
         private Utilizador utilizador;
+
         public frmGereTiposTarefas(Utilizador utilizador)
         {
             InitializeComponent();
+            lstLista.SelectedIndexChanged += lstLista_SelectedIndexChanged;
             AtualizarLista();
+
             this.utilizador = utilizador;
 
         }
-        public List<TipoTarefa> ListaTT = new List<TipoTarefa>();
+
+        private void lstLista_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var tipoTarefaSelecionada = lstLista.SelectedItem as TipoTarefa;
+
+            if (tipoTarefaSelecionada != null)
+            {
+                txtDesc.Text = tipoTarefaSelecionada.Nome;
+            }
+        }
         private void AtualizarLista()
         {
 
@@ -56,6 +69,24 @@ namespace iTasks
             this.Hide();
             frmKanban frmKanban = new frmKanban(utilizador);
             frmKanban.Show();
+        }
+
+        private void btEliminar_Click(object sender, EventArgs e)
+        {
+            TipoTarefa TipoTarefaSelecionado = lstLista.SelectedItem as TipoTarefa;
+            var controller = new TipoTarefaController();
+            controller.EliminarTipoTarefa(TipoTarefaSelecionado);
+               
+            AtualizarLista();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            TipoTarefa TipoTarefaSelecionado = lstLista.SelectedItem as TipoTarefa;
+            var controller = new TipoTarefaController();
+            string descricao = txtDesc.Text;
+            controller.EditarTipoTarefa(TipoTarefaSelecionado,descricao);
+            AtualizarLista();
         }
     }
 }

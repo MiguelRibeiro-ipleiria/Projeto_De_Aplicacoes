@@ -38,5 +38,31 @@ namespace iTasks.Controller
             }
    
         }
+
+        public void EliminarTipoTarefa(TipoTarefa TT)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var tipoTarefaDb = db.TipoTarefa.Find(TT.Id);
+                if (tipoTarefaDb != null)
+                {
+                    db.TipoTarefa.Remove(tipoTarefaDb);
+                    db.SaveChanges();
+                }
+            }
+        }
+
+        public void EditarTipoTarefa(TipoTarefa TT,string descricao)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var tipoTarefaDb = db.TipoTarefa.Find(TT.Id);
+                if (tipoTarefaDb != null)
+                {
+                    tipoTarefaDb.Nome = descricao;
+                    db.SaveChanges();
+                }
+            }
+        }
     }
 }
