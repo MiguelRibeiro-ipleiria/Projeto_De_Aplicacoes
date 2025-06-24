@@ -245,7 +245,6 @@ namespace iTasks.Controller
                     }
                     else
                     {
-                        MessageBox.Show("Não é o responsável pela Tarefa");
                         return null;
                     }
 

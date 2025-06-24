@@ -50,6 +50,7 @@
             this.btNova = new System.Windows.Forms.Button();
             this.label_NomeUser = new System.Windows.Forms.Label();
             this.btPrevisao = new System.Windows.Forms.Button();
+            this.textBox_Erros_Lst_TODO = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -203,7 +204,7 @@
             // 
             // btSetDoing
             // 
-            this.btSetDoing.Location = new System.Drawing.Point(165, 502);
+            this.btSetDoing.Location = new System.Drawing.Point(165, 533);
             this.btSetDoing.Name = "btSetDoing";
             this.btSetDoing.Size = new System.Drawing.Size(146, 23);
             this.btSetDoing.TabIndex = 5;
@@ -213,7 +214,7 @@
             // 
             // btSetDone
             // 
-            this.btSetDone.Location = new System.Drawing.Point(475, 502);
+            this.btSetDone.Location = new System.Drawing.Point(475, 533);
             this.btSetDone.Name = "btSetDone";
             this.btSetDone.Size = new System.Drawing.Size(144, 23);
             this.btSetDone.TabIndex = 6;
@@ -223,7 +224,7 @@
             // 
             // btSetTodo
             // 
-            this.btSetTodo.Location = new System.Drawing.Point(323, 502);
+            this.btSetTodo.Location = new System.Drawing.Point(323, 533);
             this.btSetTodo.Name = "btSetTodo";
             this.btSetTodo.Size = new System.Drawing.Size(144, 23);
             this.btSetTodo.TabIndex = 7;
@@ -233,7 +234,7 @@
             // 
             // btNova
             // 
-            this.btNova.Location = new System.Drawing.Point(15, 502);
+            this.btNova.Location = new System.Drawing.Point(15, 533);
             this.btNova.Name = "btNova";
             this.btNova.Size = new System.Drawing.Size(104, 23);
             this.btNova.TabIndex = 8;
@@ -261,11 +262,25 @@
             this.btPrevisao.UseVisualStyleBackColor = true;
             this.btPrevisao.Click += new System.EventHandler(this.btPrevisao_Click);
             // 
+            // textBox_Erros_Lst_TODO
+            // 
+            this.textBox_Erros_Lst_TODO.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_Erros_Lst_TODO.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_Erros_Lst_TODO.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Erros_Lst_TODO.ForeColor = System.Drawing.Color.Red;
+            this.textBox_Erros_Lst_TODO.Location = new System.Drawing.Point(15, 499);
+            this.textBox_Erros_Lst_TODO.Multiline = true;
+            this.textBox_Erros_Lst_TODO.Name = "textBox_Erros_Lst_TODO";
+            this.textBox_Erros_Lst_TODO.ReadOnly = true;
+            this.textBox_Erros_Lst_TODO.Size = new System.Drawing.Size(296, 28);
+            this.textBox_Erros_Lst_TODO.TabIndex = 33;
+            // 
             // frmKanban
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(943, 537);
+            this.ClientSize = new System.Drawing.Size(943, 568);
+            this.Controls.Add(this.textBox_Erros_Lst_TODO);
             this.Controls.Add(this.btPrevisao);
             this.Controls.Add(this.label_NomeUser);
             this.Controls.Add(this.btNova);
@@ -313,5 +328,6 @@
         private System.Windows.Forms.Button btNova;
         private System.Windows.Forms.Label label_NomeUser;
         private System.Windows.Forms.Button btPrevisao;
+        private System.Windows.Forms.TextBox textBox_Erros_Lst_TODO;
     }
 }

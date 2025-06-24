@@ -43,12 +43,21 @@ namespace iTasks.Controller
         {
             using (var db = new OrganizacaoContext())
             {
+                var TarefasComOTipoDeTarefa = from tarefas in db.Tarefas
+                                     where tarefas.TipoTarefa.Id == TT.Id
+                                     select tarefas;
+
+                foreach (var tarefa in TarefasComOTipoDeTarefa)
+                {
+                    db.Tarefas.Remove(tarefa);
+                }
+
                 var tipoTarefaDb = db.TipoTarefa.Find(TT.Id);
                 if (tipoTarefaDb != null)
                 {
                     db.TipoTarefa.Remove(tipoTarefaDb);
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
             }
         }
 
