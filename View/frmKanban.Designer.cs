@@ -51,6 +51,8 @@
             this.label_NomeUser = new System.Windows.Forms.Label();
             this.btPrevisao = new System.Windows.Forms.Button();
             this.textBox_Erros_Lst_TODO = new System.Windows.Forms.TextBox();
+            this.textBox_Erros_Lst_DOING = new System.Windows.Forms.TextBox();
+            this.textBox_Erros_Lst_DONE = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -275,11 +277,39 @@
             this.textBox_Erros_Lst_TODO.Size = new System.Drawing.Size(296, 28);
             this.textBox_Erros_Lst_TODO.TabIndex = 33;
             // 
+            // textBox_Erros_Lst_DOING
+            // 
+            this.textBox_Erros_Lst_DOING.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_Erros_Lst_DOING.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_Erros_Lst_DOING.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Erros_Lst_DOING.ForeColor = System.Drawing.Color.Red;
+            this.textBox_Erros_Lst_DOING.Location = new System.Drawing.Point(323, 499);
+            this.textBox_Erros_Lst_DOING.Multiline = true;
+            this.textBox_Erros_Lst_DOING.Name = "textBox_Erros_Lst_DOING";
+            this.textBox_Erros_Lst_DOING.ReadOnly = true;
+            this.textBox_Erros_Lst_DOING.Size = new System.Drawing.Size(296, 28);
+            this.textBox_Erros_Lst_DOING.TabIndex = 34;
+            // 
+            // textBox_Erros_Lst_DONE
+            // 
+            this.textBox_Erros_Lst_DONE.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox_Erros_Lst_DONE.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox_Erros_Lst_DONE.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Erros_Lst_DONE.ForeColor = System.Drawing.Color.Red;
+            this.textBox_Erros_Lst_DONE.Location = new System.Drawing.Point(631, 499);
+            this.textBox_Erros_Lst_DONE.Multiline = true;
+            this.textBox_Erros_Lst_DONE.Name = "textBox_Erros_Lst_DONE";
+            this.textBox_Erros_Lst_DONE.ReadOnly = true;
+            this.textBox_Erros_Lst_DONE.Size = new System.Drawing.Size(296, 28);
+            this.textBox_Erros_Lst_DONE.TabIndex = 35;
+            // 
             // frmKanban
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(943, 568);
+            this.Controls.Add(this.textBox_Erros_Lst_DONE);
+            this.Controls.Add(this.textBox_Erros_Lst_DOING);
             this.Controls.Add(this.textBox_Erros_Lst_TODO);
             this.Controls.Add(this.btPrevisao);
             this.Controls.Add(this.label_NomeUser);
@@ -329,5 +359,7 @@
         private System.Windows.Forms.Label label_NomeUser;
         private System.Windows.Forms.Button btPrevisao;
         private System.Windows.Forms.TextBox textBox_Erros_Lst_TODO;
+        private System.Windows.Forms.TextBox textBox_Erros_Lst_DOING;
+        private System.Windows.Forms.TextBox textBox_Erros_Lst_DONE;
     }
 }

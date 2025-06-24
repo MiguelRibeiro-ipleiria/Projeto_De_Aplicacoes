@@ -100,6 +100,7 @@ namespace iTasks
         private void btSetDoing_Click(object sender, EventArgs e)
         {
             textBox_Erros_Lst_TODO.Clear();
+            textBox_Erros_Lst_TODO.ForeColor = Color.Red;
             var kanbancontroller = new KanbanController();
             var tarefaselecionada = lstTodo.SelectedItem as Tarefa;
 
@@ -132,6 +133,12 @@ namespace iTasks
 
                     kanbancontroller.AlterarEstadoTarefaDoing(tarefaselecionada, utilizador, Datarealinicio);
 
+                    textBox_Erros_Lst_TODO.ForeColor = Color.Green;
+                    textBox_Erros_Lst_DOING.ForeColor = Color.Green;
+
+                    textBox_Erros_Lst_TODO.Text = "- A " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " foi movida! (Doing)";
+                    textBox_Erros_Lst_DOING.Text = "- " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " adicionada!";
+
                     ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
                     ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
 
@@ -156,31 +163,49 @@ namespace iTasks
 
         private void btSetTodo_Click(object sender, EventArgs e)
         {
+            textBox_Erros_Lst_TODO.Clear();
+            textBox_Erros_Lst_DOING.Clear();
+            textBox_Erros_Lst_DOING.ForeColor = Color.Red;
+
             var kanbancontroller = new KanbanController();
             var tarefaselecionada = lstDoing.SelectedItem as Tarefa;
 
             Tarefa MaiorOrdem = kanbancontroller.TarefaMaiorOrdemDoUtilizadorNoDOING(utilizador, tarefaselecionada);
-            if (MaiorOrdem == null)
+            
+            if(tarefaselecionada != null)
             {
-                return;
-            }
-            if (tarefaselecionada.OrdemExecucao == MaiorOrdem.OrdemExecucao)
-            {
-                kanbancontroller.AlterarEstadoTarefaToDo(tarefaselecionada, utilizador);
+                if (MaiorOrdem == null)
+                {
+                    return;
+                }
+                if (tarefaselecionada.OrdemExecucao == MaiorOrdem.OrdemExecucao)
+                {
+                    kanbancontroller.AlterarEstadoTarefaToDo(tarefaselecionada, utilizador);
 
-                ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
-                ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
+                    ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
+                    ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
 
-                lstTodo.DataSource = null;
-                lstTodo.DataSource = ListaTarefasToDo;
-                lstDoing.DataSource = null;
-                lstDoing.DataSource = ListaTarefasDoing;
+                    lstTodo.DataSource = null;
+                    lstTodo.DataSource = ListaTarefasToDo;
+                    lstDoing.DataSource = null;
+                    lstDoing.DataSource = ListaTarefasDoing;
 
+                    textBox_Erros_Lst_TODO.ForeColor = Color.Green;
+                    textBox_Erros_Lst_DOING.ForeColor = Color.Green;
+
+                    textBox_Erros_Lst_DOING.Text = "- A " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " foi movida! (ToDo)";
+                    textBox_Erros_Lst_TODO.Text = "- " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " adicionada!";
+                }
+                else
+                {
+                    textBox_Erros_Lst_DOING.Text = "- Retire as tarefas com maior ordem primeiro!";
+                }
             }
             else
             {
-                MessageBox.Show("Retire as tarefas com maior ordem primeiro!");
+                textBox_Erros_Lst_DOING.Text = "- Selecione alguma tarefa!";
             }
+
 
         }
 
