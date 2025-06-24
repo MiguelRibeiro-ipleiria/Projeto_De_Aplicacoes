@@ -130,8 +130,41 @@ namespace iTasks.Controller
                 db.SaveChanges();
             }
         }
+        public void EditarGestor(Gestor gestor, string nome, string username, string pass, Departamento departamento, bool gerirutilizadores)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var gestordb = db.Gestores.Find(gestor.Id);
+                if (gestordb != null)
+                {
+                    gestordb.Nome = nome;
+                    gestordb.Username = username;
+                    gestordb.Password = pass;
+                    gestordb.Departamento = departamento;
+                    gestordb.GereUtilizadores = gerirutilizadores;
+                    db.SaveChanges();
+                }
+            }
+        }
 
-        
+        public void EditarProgramador(Programador prog, string nome, string username, string pass, NivelExperiencia nivel, Gestor Gestor)
+        {
+            using (var db = new OrganizacaoContext())
+            {
+                var programador = db.Progamadores.Find(prog.Id);
+                var gestorDb = db.Gestores.Find(Gestor.Id);
+                if (programador != null)
+                {
+                    programador.Nome = nome;
+                    programador.Username = username;
+                    programador.Password = pass;
+                    programador.NivelExperiencia = nivel;
+                    programador.Gestor = gestorDb;
+                    db.SaveChanges();
+                }
+            }
+        }
+
 
     }
 }

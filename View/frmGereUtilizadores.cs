@@ -1,4 +1,5 @@
 ﻿using iTasks.Controller;
+using iTasks.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -486,5 +487,35 @@ namespace iTasks
             }
         }
 
+        private void btnEditarGestor_Click(object sender, EventArgs e)
+        {
+            Gestor GestorSelecionado = lstListaGestores.SelectedItem as Gestor;
+            var controller = new UsersController();
+            string nome = txtNomeGestor.Text;
+            string username = txtUsernameGestor.Text;
+            string pass = txtPasswordGestor.Text;
+            string selectedText = cbDepartamento.SelectedItem.ToString();
+            Departamento departamento = (Departamento)Enum.Parse(typeof(Departamento), selectedText);
+            bool gerirutilizadores = chkGereUtilizadores.Checked;
+            controller.EditarGestor(GestorSelecionado,nome,username,pass, departamento, gerirutilizadores);
+            AtualizarLista("Gestor");
+            
+        }
+
+        private void btnEditarProg_Click(object sender, EventArgs e)
+        {
+
+            Programador ProgramadorSelecionado = lstListaProgramadores.SelectedItem as Programador;
+            var controller = new UsersController();
+            string nome = txtNomeProg.Text;
+            string username = txtUsernameProg.Text;
+            string pass = txtPasswordProg.Text;
+            string selectedNivelText = cbNivelProg.SelectedItem.ToString();
+            NivelExperiencia NivelDeExperiencia = (NivelExperiencia)Enum.Parse(typeof(NivelExperiencia), selectedNivelText);
+            Gestor gestorselecionado = (Gestor)cbGestorProg.SelectedItem;
+            controller.EditarProgramador(ProgramadorSelecionado, nome, username, pass, NivelDeExperiencia, gestorselecionado);
+            AtualizarLista("Programador");
+          
+         }
     }
 }
