@@ -71,7 +71,6 @@ namespace iTasks
         private void btPrevisao_Click(object sender, EventArgs e)
         {
             DetalhesTempoPorSP();
-
         }
 
         private void btNova_Click(object sender, EventArgs e)
@@ -99,7 +98,10 @@ namespace iTasks
 
         private void btSetDoing_Click(object sender, EventArgs e)
         {
+            textBox_Erros_Lst_DOING.Clear();
             textBox_Erros_Lst_TODO.Clear();
+            textBox_Erros_Lst_DONE.Clear();
+
             textBox_Erros_Lst_TODO.ForeColor = Color.Red;
             var kanbancontroller = new KanbanController();
             var tarefaselecionada = lstTodo.SelectedItem as Tarefa;
@@ -131,21 +133,26 @@ namespace iTasks
                 {
                     DateTime Datarealinicio = DateTime.Now;
 
-                    kanbancontroller.AlterarEstadoTarefaDoing(tarefaselecionada, utilizador, Datarealinicio);
+                    if(kanbancontroller.AlterarEstadoTarefaDoing(tarefaselecionada, utilizador, Datarealinicio))
+                    {
+                        textBox_Erros_Lst_TODO.ForeColor = Color.Green;
+                        textBox_Erros_Lst_DOING.ForeColor = Color.Green;
 
-                    textBox_Erros_Lst_TODO.ForeColor = Color.Green;
-                    textBox_Erros_Lst_DOING.ForeColor = Color.Green;
+                        textBox_Erros_Lst_TODO.Text = "- A " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " foi movida! (Doing)";
+                        textBox_Erros_Lst_DOING.Text = "- " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " adicionada!";
 
-                    textBox_Erros_Lst_TODO.Text = "- A " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " foi movida! (Doing)";
-                    textBox_Erros_Lst_DOING.Text = "- " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " adicionada!";
+                        ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
+                        ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
 
-                    ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
-                    ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
-
-                    lstTodo.DataSource = null;
-                    lstTodo.DataSource = ListaTarefasToDo;
-                    lstDoing.DataSource = null;
-                    lstDoing.DataSource = ListaTarefasDoing;
+                        lstTodo.DataSource = null;
+                        lstTodo.DataSource = ListaTarefasToDo;
+                        lstDoing.DataSource = null;
+                        lstDoing.DataSource = ListaTarefasDoing;
+                    }
+                    else
+                    {
+                        textBox_Erros_Lst_TODO.Text = "- Esta tarefa não lhe pertence!";
+                    }
 
                 }
                 else
@@ -163,38 +170,46 @@ namespace iTasks
 
         private void btSetTodo_Click(object sender, EventArgs e)
         {
-            textBox_Erros_Lst_TODO.Clear();
             textBox_Erros_Lst_DOING.Clear();
+            textBox_Erros_Lst_TODO.Clear();
+            textBox_Erros_Lst_DONE.Clear();
             textBox_Erros_Lst_DOING.ForeColor = Color.Red;
 
             var kanbancontroller = new KanbanController();
             var tarefaselecionada = lstDoing.SelectedItem as Tarefa;
-
-            Tarefa MaiorOrdem = kanbancontroller.TarefaMaiorOrdemDoUtilizadorNoDOING(utilizador, tarefaselecionada);
             
             if(tarefaselecionada != null)
             {
+                Tarefa MaiorOrdem = kanbancontroller.TarefaMaiorOrdemDoUtilizadorNoDOING(utilizador, tarefaselecionada);
                 if (MaiorOrdem == null)
                 {
+                    textBox_Erros_Lst_DOING.Text = "- Esta tarefa não lhe pertence!";
                     return;
                 }
                 if (tarefaselecionada.OrdemExecucao == MaiorOrdem.OrdemExecucao)
                 {
-                    kanbancontroller.AlterarEstadoTarefaToDo(tarefaselecionada, utilizador);
+                    if (kanbancontroller.AlterarEstadoTarefaToDo(tarefaselecionada, utilizador))
+                    {
+                        ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
+                        ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
 
-                    ListaTarefasToDo = kanbancontroller.VerificarEstadoTodo();
-                    ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
+                        lstTodo.DataSource = null;
+                        lstTodo.DataSource = ListaTarefasToDo;
+                        lstDoing.DataSource = null;
+                        lstDoing.DataSource = ListaTarefasDoing;
 
-                    lstTodo.DataSource = null;
-                    lstTodo.DataSource = ListaTarefasToDo;
-                    lstDoing.DataSource = null;
-                    lstDoing.DataSource = ListaTarefasDoing;
+                        textBox_Erros_Lst_TODO.ForeColor = Color.Green;
+                        textBox_Erros_Lst_DOING.ForeColor = Color.Green;
 
-                    textBox_Erros_Lst_TODO.ForeColor = Color.Green;
-                    textBox_Erros_Lst_DOING.ForeColor = Color.Green;
+                        textBox_Erros_Lst_DOING.Text = "- A " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " foi movida! (ToDo)";
+                        textBox_Erros_Lst_TODO.Text = "- " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " adicionada!";
+                    }
+                    else
+                    {
+                        textBox_Erros_Lst_DOING.Text = "- Esta tarefa não lhe pertence!";
+                    }
 
-                    textBox_Erros_Lst_DOING.Text = "- A " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " foi movida! (ToDo)";
-                    textBox_Erros_Lst_TODO.Text = "- " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " adicionada!";
+
                 }
                 else
                 {
@@ -218,52 +233,107 @@ namespace iTasks
 
         private void btSetDone_Click(object sender, EventArgs e)
         {
+            textBox_Erros_Lst_DOING.Clear();
+            textBox_Erros_Lst_TODO.Clear();
+            textBox_Erros_Lst_DONE.Clear();
+            textBox_Erros_Lst_DOING.ForeColor = Color.Red;
+
+
             var kanbancontroller = new KanbanController();
-            var tarefaselecionada = lstDoing.SelectedItem as Tarefa;            
-            Tarefa MenorOrdem = kanbancontroller.TarefaMenorOrdemDoUtilizadorNODOING(utilizador, tarefaselecionada);
-
-            if (tarefaselecionada.OrdemExecucao == MenorOrdem.OrdemExecucao)
+            var tarefaselecionada = lstDoing.SelectedItem as Tarefa;
+            
+            if(tarefaselecionada != null)
             {
-                DateTime DataDeRealFim = DateTime.Now;
-                kanbancontroller.AlterarEstadoTarefaDone(tarefaselecionada, utilizador, DataDeRealFim);
+                Tarefa MenorOrdem = kanbancontroller.TarefaMenorOrdemDoUtilizadorNODOING(utilizador, tarefaselecionada);
+
+                if (MenorOrdem == null) {
+                    textBox_Erros_Lst_DOING.Text = "- Não é o responsável pela Tarefa!";
+                    return;
+                }
+                else
+                {
+                    if (tarefaselecionada.OrdemExecucao == MenorOrdem.OrdemExecucao)
+                    {
+                        DateTime DataDeRealFim = DateTime.Now;
+                        kanbancontroller.AlterarEstadoTarefaDone(tarefaselecionada, utilizador, DataDeRealFim);
 
 
-                ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
-                ListaTarefasDone = kanbancontroller.VerificarEstadoDone();
+                        ListaTarefasDoing = kanbancontroller.VerificarEstadoDoing();
+                        ListaTarefasDone = kanbancontroller.VerificarEstadoDone();
 
-                lstDone.DataSource = null;
-                lstDone.DataSource = ListaTarefasDone;
-                lstDoing.DataSource = null;
-                lstDoing.DataSource = ListaTarefasDoing;
+                        lstDone.DataSource = null;
+                        lstDone.DataSource = ListaTarefasDone;
+                        lstDoing.DataSource = null;
+                        lstDoing.DataSource = ListaTarefasDoing;
+
+                        textBox_Erros_Lst_DONE.ForeColor = Color.Green;
+                        textBox_Erros_Lst_DOING.ForeColor = Color.Green;
+
+                        textBox_Erros_Lst_DOING.Text = "- A " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " foi movida! (Done)";
+                        textBox_Erros_Lst_DONE.Text = "- A " + tarefaselecionada.OrdemExecucao + "º Tarefa de " + tarefaselecionada.Programador.Nome + " foi concluida!";
+
+                    }
+                    else
+                    {
+                        textBox_Erros_Lst_DOING.Text = "- Conclua outras tarefas para completar esta!";
+                    }
+                }
+
             }
             else
             {
-                MessageBox.Show("Conclua outras tarefas para completar esta!");
+                textBox_Erros_Lst_DOING.Text = "- Selecione alguma tarefa!";
             }
+
 
         }
 
         private void lstDone_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ExecutarDetalhesTarefa(lstDone);
+            textBox_Erros_Lst_DONE.Clear();
+            textBox_Erros_Lst_DONE.ForeColor = Color.Red;
+            if (!ExecutarDetalhesTarefa(lstDone))
+            {
+                textBox_Erros_Lst_DONE.Text = "- Selecione uma tarefa para ver os detalhes!";
+            }
+            
         }
 
         private void lstDoing_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ExecutarDetalhesTarefa(lstDoing);
+            textBox_Erros_Lst_DOING.Clear();
+            textBox_Erros_Lst_DOING.ForeColor = Color.Red;
+            if (!ExecutarDetalhesTarefa(lstDoing))
+            {
+                textBox_Erros_Lst_DOING.Text = "- Selecione uma tarefa para ver os detalhes!";
+            }
+            
         }
 
         private void lstTodo_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            ExecutarDetalhesTarefa(lstTodo);
+            textBox_Erros_Lst_TODO.Clear(); 
+            textBox_Erros_Lst_TODO.ForeColor = Color.Red;
+            if (!ExecutarDetalhesTarefa(lstTodo))
+            {
+                textBox_Erros_Lst_TODO.Text = "- Selecione uma tarefa para ver os detalhes!";
+            }
         }
-        private void ExecutarDetalhesTarefa(ListBox lstbox)
+        private bool ExecutarDetalhesTarefa(ListBox lstbox)
         {
             var tarefaselecionada = lstbox.SelectedItem as Tarefa;
+            if(tarefaselecionada != null)
+            {
+                this.Hide();
+                frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, tarefaselecionada);
+                frmDetalhesTarefa.Show();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
-            this.Hide();
-            frmDetalhesTarefa frmDetalhesTarefa = new frmDetalhesTarefa(utilizador, tarefaselecionada);
-            frmDetalhesTarefa.Show();
         }
 
         private void exportarParaCSVToolStripMenuItem_Click(object sender, EventArgs e)
@@ -305,7 +375,7 @@ namespace iTasks
             var popup = new Form()
             {
                 Width = 300,
-                Height = 250,
+                Height = 200,
                 Text = "Detalhes de Tempo de Tarefas",
                 StartPosition = FormStartPosition.CenterParent,
                 FormBorderStyle = FormBorderStyle.FixedDialog,
@@ -335,19 +405,36 @@ namespace iTasks
             {
                 var SP_Tempo = kanbancontroller.TarefasCalculo(ListaTarefasDone, ListaTarefasToDo, "horas");
                 txtTempo.Text = "";
-                foreach (var kv in SP_Tempo)
+                if (SP_Tempo.Count <= 0)
                 {
-                    txtTempo.AppendText($"SP {kv.Key}: {kv.Value} horas{Environment.NewLine}");
+                    txtTempo.Text = "Sem tarefas no estado TODO";
                 }
+                else
+                {
+                    txtTempo.Clear();
+                    foreach (var kv in SP_Tempo)
+                    {
+                        txtTempo.AppendText($"SP {kv.Key}: {kv.Value} horas{Environment.NewLine}");
+                    }
+                }
+
             };
 
             option2.Click += (sender, e) =>
             {
                 var SP_Tempo = kanbancontroller.TarefasCalculo(ListaTarefasDone, ListaTarefasToDo,  "minutos");
                 txtTempo.Text = "";
-                foreach (var kv in SP_Tempo)
+                if (SP_Tempo.Count <= 0)
                 {
-                    txtTempo.AppendText($"SP {kv.Key}: {kv.Value} minutos{Environment.NewLine}");
+                    txtTempo.Text = "Sem tarefas no estado TODO";
+                }
+                else
+                {
+                    txtTempo.Clear();
+                    foreach (var kv in SP_Tempo)
+                    {
+                        txtTempo.AppendText($"SP {kv.Key}: {kv.Value} minutos{Environment.NewLine}");
+                    }
                 }
             };
 
@@ -355,10 +442,19 @@ namespace iTasks
             {
                 var SP_Tempo = kanbancontroller.TarefasCalculo(ListaTarefasDone, ListaTarefasToDo, "segundos");
                 txtTempo.Text = "";
-                foreach (var kv in SP_Tempo)
+                if (SP_Tempo.Count <= 0)
                 {
-                    txtTempo.AppendText($"SP {kv.Key}: {kv.Value} segundos{Environment.NewLine}");
+                    txtTempo.Text = "Sem tarefas no estado TODO";
                 }
+                else
+                {
+                    txtTempo.Clear();
+                    foreach (var kv in SP_Tempo)
+                    {
+                        txtTempo.AppendText($"SP {kv.Key}: {kv.Value} segundos{Environment.NewLine}");
+                    }
+                }
+
             };
 
             MenuTempo.Items.Add(option1);

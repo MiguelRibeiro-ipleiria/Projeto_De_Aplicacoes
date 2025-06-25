@@ -48,6 +48,7 @@
             this.txtUsernameGestor = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnEditarProg = new System.Windows.Forms.Button();
             this.Eliminar_Programador = new System.Windows.Forms.Button();
             this.label_erro_programadores = new System.Windows.Forms.Label();
             this.button_Fechar = new System.Windows.Forms.Button();
@@ -67,7 +68,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtNomeProg = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.btnEditarProg = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -292,9 +292,19 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Programadores";
             // 
+            // btnEditarProg
+            // 
+            this.btnEditarProg.Location = new System.Drawing.Point(294, 382);
+            this.btnEditarProg.Name = "btnEditarProg";
+            this.btnEditarProg.Size = new System.Drawing.Size(201, 23);
+            this.btnEditarProg.TabIndex = 50;
+            this.btnEditarProg.Text = "Editar";
+            this.btnEditarProg.UseVisualStyleBackColor = true;
+            this.btnEditarProg.Click += new System.EventHandler(this.btnEditarProg_Click);
+            // 
             // Eliminar_Programador
             // 
-            this.Eliminar_Programador.Location = new System.Drawing.Point(294, 354);
+            this.Eliminar_Programador.Location = new System.Drawing.Point(294, 328);
             this.Eliminar_Programador.Margin = new System.Windows.Forms.Padding(2);
             this.Eliminar_Programador.Name = "Eliminar_Programador";
             this.Eliminar_Programador.Size = new System.Drawing.Size(201, 23);
@@ -326,7 +336,7 @@
             // 
             // btLimparProg
             // 
-            this.btLimparProg.Location = new System.Drawing.Point(294, 327);
+            this.btLimparProg.Location = new System.Drawing.Point(294, 354);
             this.btLimparProg.Margin = new System.Windows.Forms.Padding(2);
             this.btLimparProg.Name = "btLimparProg";
             this.btLimparProg.Size = new System.Drawing.Size(201, 23);
@@ -463,16 +473,6 @@
             this.label10.Size = new System.Drawing.Size(38, 13);
             this.label10.TabIndex = 35;
             this.label10.Text = "Nome:";
-            // 
-            // btnEditarProg
-            // 
-            this.btnEditarProg.Location = new System.Drawing.Point(294, 382);
-            this.btnEditarProg.Name = "btnEditarProg";
-            this.btnEditarProg.Size = new System.Drawing.Size(201, 23);
-            this.btnEditarProg.TabIndex = 50;
-            this.btnEditarProg.Text = "Editar";
-            this.btnEditarProg.UseVisualStyleBackColor = true;
-            this.btnEditarProg.Click += new System.EventHandler(this.btnEditarProg_Click);
             // 
             // frmGereUtilizadores
             // 

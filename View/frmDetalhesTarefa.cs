@@ -34,6 +34,7 @@ namespace iTasks
         private void btGravar_Click(object sender, EventArgs e)
         { 
             textBox_Erros.Clear();
+            textBox_Erros.ForeColor = Color.Red;
             var tarefascontroller = new TarefasController();
             try
             {
@@ -50,10 +51,27 @@ namespace iTasks
                 if (TarefaCriada(tarefa) == true)
                 {
                     bool isfibonnaci = tarefascontroller.VerificarNumeroFibonacci(storypoints);
+                    bool iscorrectordem = tarefascontroller.OrdemRep(programador, ordemInc);
+
                     if (isfibonnaci == true)
                     {
-                        tarefascontroller.AlterarTarefa(tarefa, descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
-                        MessageBox.Show("Tarefa Alterada com Sucesso!");
+                        if (iscorrectordem == true)
+                        {
+                            if (datainicio <= datafim)
+                            {
+                                tarefascontroller.AlterarTarefa(tarefa, descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                                textBox_Erros.ForeColor = Color.Green;
+                                textBox_Erros.AppendText("- Tarefa Alterada com Sucesso!\n");
+                            }
+                            else
+                            {
+                                textBox_Erros.AppendText("- Data Inválida (A data de fim tem de ser maior que a de inicio)\n");
+                            }
+                        }
+                        else
+                        {
+                            textBox_Erros.AppendText("- Ordem em uso, altere a ordem da tarefa\n");
+                        }
                     }
                     else
                     {
@@ -71,7 +89,8 @@ namespace iTasks
                             if (datainicio <= datafim)
                             {
                                 tarefascontroller.AdicionarTarefa(descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
-                                MessageBox.Show("Tarefa Criada com Sucesso!");
+                                textBox_Erros.ForeColor = Color.Green;
+                                textBox_Erros.AppendText("- Tarefa Criada com Sucesso!\n");
                             }
                             else
                             {

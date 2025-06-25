@@ -89,7 +89,7 @@ namespace iTasks.Controller
             }
         }
 
-        public void AlterarEstadoTarefaDoing(Tarefa tarefa, Utilizador utilizador, DateTime Datarealinicio)
+        public bool AlterarEstadoTarefaDoing(Tarefa tarefa, Utilizador utilizador, DateTime Datarealinicio)
         {
             using (var db = new OrganizacaoContext())
             {
@@ -104,16 +104,21 @@ namespace iTasks.Controller
                         queryEstadoParaAlterar.EstadoAtual = EstadoAtual.Doing;
                         queryEstadoParaAlterar.DataRealInicio = Datarealinicio;
                         db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Esta tarefa não lhe pertence!");
+                    return false;
                 }
             }
         }
 
-        public void AlterarEstadoTarefaToDo(Tarefa tarefa, Utilizador utilizador)
+        public bool AlterarEstadoTarefaToDo(Tarefa tarefa, Utilizador utilizador)
         {
             using (var db = new OrganizacaoContext())
             {
@@ -128,14 +133,17 @@ namespace iTasks.Controller
                         queryEstadoParaAlterar.EstadoAtual = EstadoAtual.ToDo;
                         queryEstadoParaAlterar.DataRealInicio = null;
                         db.SaveChanges();
+                        return true;
                     }
-
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Esta tarefa não lhe pertence!");
+                    return false;
                 }
-
 
             }
         }
@@ -281,7 +289,6 @@ namespace iTasks.Controller
                     }
                     else
                     {
-                        MessageBox.Show("Não é o responsável pela Tarefa");
                         return null;
                     }
 
@@ -319,7 +326,6 @@ namespace iTasks.Controller
                     }
                     else
                     {
-                        MessageBox.Show("Não é o responsável pela Tarefa");
                         return null;
                     }
 
