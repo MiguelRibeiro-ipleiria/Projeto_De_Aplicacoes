@@ -46,18 +46,21 @@ namespace iTasks
         }
         private void btGravar_Click(object sender, EventArgs e)
         {
-            label_descicao_erro.Text = "";
+            textBox_Erros_Tipos_De_Tarefas.ForeColor = Color.Red;
+            textBox_Erros_Tipos_De_Tarefas.Text = "";
             string descricao = txtDesc.Text;
 
             if (string.IsNullOrEmpty(descricao))
             {
-                label_descicao_erro.Text = "Preencha o campo acima";
+                textBox_Erros_Tipos_De_Tarefas.Text = "Preencha o campo corretamente!";
             }
             else
             {
                 var controller = new TipoTarefaController();
                 controller.AdicionarTipoTarefa(descricao);
                 AtualizarLista();
+                textBox_Erros_Tipos_De_Tarefas.ForeColor = Color.Green;
+                textBox_Erros_Tipos_De_Tarefas.Text = "Tipo Tarefa inserido com sucesso!";
             }
 
 
@@ -73,20 +76,46 @@ namespace iTasks
 
         private void btEliminar_Click(object sender, EventArgs e)
         {
+            textBox_Erros_Tipos_De_Tarefas.ForeColor = Color.Red;
             TipoTarefa TipoTarefaSelecionado = lstLista.SelectedItem as TipoTarefa;
             var controller = new TipoTarefaController();
-            controller.EliminarTipoTarefa(TipoTarefaSelecionado);
-               
-            AtualizarLista();
+
+            if(TipoTarefaSelecionado == null)
+            {
+                textBox_Erros_Tipos_De_Tarefas.Text = "Selecione um tipo de tarefa!";
+            }
+            else
+            {
+                controller.EliminarTipoTarefa(TipoTarefaSelecionado);
+                AtualizarLista();
+                textBox_Erros_Tipos_De_Tarefas.Text = "Tipo de Tarefa eliminado com sucesso!";
+            }
+
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
+            textBox_Erros_Tipos_De_Tarefas.ForeColor = Color.Red;
             TipoTarefa TipoTarefaSelecionado = lstLista.SelectedItem as TipoTarefa;
             var controller = new TipoTarefaController();
             string descricao = txtDesc.Text;
-            controller.EditarTipoTarefa(TipoTarefaSelecionado,descricao);
-            AtualizarLista();
+            if (TipoTarefaSelecionado == null)
+            {
+                textBox_Erros_Tipos_De_Tarefas.Text = "Selecione um tipo de tarefa!";
+            }
+            else if (string.IsNullOrEmpty(descricao))
+            {
+                textBox_Erros_Tipos_De_Tarefas.Text = "Preencha o campo corretamente!";
+            }
+            else
+            {
+                textBox_Erros_Tipos_De_Tarefas.ForeColor = Color.Green;
+                controller.EditarTipoTarefa(TipoTarefaSelecionado, descricao);
+                AtualizarLista();
+                textBox_Erros_Tipos_De_Tarefas.Text = "Tipo de Tarefa atualizado com sucesso!";
+            }
+
+
         }
     }
 }
