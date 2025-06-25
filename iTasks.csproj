@@ -56,10 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\ConsultasDone.cs" />
+    <Compile Include="Controller\TarefasConcluidasController.cs" />
     <Compile Include="Controller\KanbanController.cs" />
     <Compile Include="Controller\TarefasController.cs" />
     <Compile Include="Controller\LoginController.cs" />
+    <Compile Include="Controller\TarefasEmCursoController.cs" />
     <Compile Include="Controller\TipoTarefaController.cs" />
     <Compile Include="Controller\UsersController.cs" />
     <Compile Include="Model\TipoTarefa.cs" />

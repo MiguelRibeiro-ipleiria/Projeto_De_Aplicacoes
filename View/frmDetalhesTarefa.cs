@@ -55,22 +55,15 @@ namespace iTasks
 
                     if (isfibonnaci == true)
                     {
-                        if (iscorrectordem == true)
+                        if (datainicio <= datafim)
                         {
-                            if (datainicio <= datafim)
-                            {
-                                tarefascontroller.AlterarTarefa(tarefa, descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
-                                textBox_Erros.ForeColor = Color.Green;
-                                textBox_Erros.AppendText("- Tarefa Alterada com Sucesso!\n");
-                            }
-                            else
-                            {
-                                textBox_Erros.AppendText("- Data Inválida (A data de fim tem de ser maior que a de inicio)\n");
-                            }
+                            tarefascontroller.AlterarTarefa(tarefa, descricao, ordemInc, storypoints, tipotarefa, programador, datainicio, datafim, estadoatual, DataDeCriacao);
+                            textBox_Erros.ForeColor = Color.Green;
+                            textBox_Erros.AppendText("- Tarefa Alterada com Sucesso!\n");
                         }
                         else
                         {
-                            textBox_Erros.AppendText("- Ordem em uso, altere a ordem da tarefa\n");
+                            textBox_Erros.AppendText("- Data Inválida (A data de fim tem de ser maior que a de inicio)\n");
                         }
                     }
                     else
@@ -135,6 +128,8 @@ namespace iTasks
                 txtDesc.Text = Tarefa.Descricao;
                 cbProgramador.Text = Tarefa.Programador.ToString();
                 cbTipoTarefa.Text = Tarefa.TipoTarefa.ToString();
+                dtInicio.Value = Tarefa.DataPrevistoInicio.Value;
+                dtFim.Value = Tarefa.DataPrevistoFim.Value;
 
                 txtId.Text = Tarefa.Id.ToString();
                 txtEstado.Text = Tarefa.EstadoAtual.ToString();

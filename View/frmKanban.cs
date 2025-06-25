@@ -347,7 +347,7 @@ namespace iTasks
             {
                 escrever_dados_tarefas_done.WriteLine(TarefasDone.Programador+";"+TarefasDone.Descricao+";"+TarefasDone.DataPrevistoInicio+";"+TarefasDone.DataPrevistoFim+";"+TarefasDone.TipoTarefa+";"+TarefasDone.DataRealInicio+";"+TarefasDone.DataRealFim+";");
             }
-
+            textBox_Aviso_ExportarCSV.Text = "As tarefas concluídas foram exportadas para o ficheiro .CSV, às " + DateTime.Now;
 
 
             escrever_dados_tarefas_done.Close();
@@ -394,6 +394,7 @@ namespace iTasks
                 BorderStyle = BorderStyle.None,
                 ScrollBars = ScrollBars.Vertical
             };
+            txtTempo.Text = "Selecione uma das opções acima!";
 
             var option1 = new ToolStripMenuItem("Horas");
             var option2 = new ToolStripMenuItem("Minutos");
@@ -407,7 +408,7 @@ namespace iTasks
                 txtTempo.Text = "";
                 if (SP_Tempo.Count <= 0)
                 {
-                    txtTempo.Text = "Sem tarefas no estado TODO";
+                    txtTempo.Text = "Sem tarefas no estado TODO ou Sem dados de tarefas realizadas para mostrar";
                 }
                 else
                 {
@@ -426,7 +427,7 @@ namespace iTasks
                 txtTempo.Text = "";
                 if (SP_Tempo.Count <= 0)
                 {
-                    txtTempo.Text = "Sem tarefas no estado TODO";
+                    txtTempo.Text = "Sem tarefas no estado TODO ou Sem dados de tarefas realizadas para mostrar";
                 }
                 else
                 {
@@ -444,7 +445,7 @@ namespace iTasks
                 txtTempo.Text = "";
                 if (SP_Tempo.Count <= 0)
                 {
-                    txtTempo.Text = "Sem tarefas no estado TODO";
+                    txtTempo.Text = "Sem tarefas no estado TODO ou Sem dados de tarefas realizadas para mostrar";
                 }
                 else
                 {

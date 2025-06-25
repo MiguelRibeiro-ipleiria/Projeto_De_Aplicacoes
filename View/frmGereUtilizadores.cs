@@ -61,7 +61,8 @@ namespace iTasks
 
         private void btGravarGestor_Click(object sender, EventArgs e)
         {
-            label_erro_gestores.Text = "";
+            textBox_erros_gestor.ForeColor = Color.Red;
+            textBox_erros_gestor.Text = "";
             try
             {
                 string nome = txtNomeGestor.Text;
@@ -70,7 +71,7 @@ namespace iTasks
                 
                 if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass) || cbDepartamento.SelectedItem == null)
                 {
-                    label_erro_gestores.Text = "Preencha todos os campos";  
+                    textBox_erros_gestor.Text = "Preencha todos os campos corretamente!";  
                     return;
                 }
 
@@ -80,44 +81,48 @@ namespace iTasks
 
                 if (CheckUsername(username) == true)
                 {
-                    label_erro_gestores.Text = "Username em uso";
+                    textBox_erros_gestor.Text = "Username em uso!";
                 }
                 else
                 {
                     var controller = new UsersController();
                     controller.AdicionarGestor(nome, username, pass, departamento, gerirutilizadores);
                     AtualizarLista("Gestor");
-
+                    textBox_erros_gestor.ForeColor = Color.Green;
+                    textBox_erros_gestor.Text = "Gestor inserido com sucesso!";
 
                 }
             }
             catch (Exception ex)
             {
-                label_erro_gestores.Text = "Erro: " + ex.Message;
+                textBox_erros_gestor.Text = "Erro: " + ex.Message;
             }
         }
 
         private void btGravarProg_Click(object sender, EventArgs e)
         {
-            label_erro_programadores.Text = "";
+            textBox_erros_programador.ForeColor = Color.Red;
+            textBox_erros_programador.Text = "";
             try
             {
                 string nome = txtNomeProg.Text;
                 string username = txtUsernameProg.Text;
                 string pass = txtPasswordProg.Text;
+
+                if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass) || cbNivelProg.SelectedItem == null || cbGestorProg.SelectedItem == null)
+                {
+                    textBox_erros_programador.Text = "Preencha todos os campos corretamente!";
+                    return;
+                }
+
                 string selectedNivelText = cbNivelProg.SelectedItem.ToString();
                 NivelExperiencia NivelDeExperiencia = (NivelExperiencia)Enum.Parse(typeof(NivelExperiencia), selectedNivelText);
                 Gestor gestorselecionado = (Gestor)cbGestorProg.SelectedItem;
 
-                if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass))
-                {
-                    label_erro_programadores.Text = "Preencha todos os campos";
-                    return;
-                }
 
                 if (CheckUsername(username) == true)
                 {
-                    label_erro_programadores.Text = "Username em uso";
+                    textBox_erros_programador.Text = "Username em uso!";
 
                 }
                 else
@@ -125,11 +130,13 @@ namespace iTasks
                     var controller = new UsersController();
                     controller.AdicionarProgramador(nome, username, pass, NivelDeExperiencia, gestorselecionado);
                     AtualizarLista("Programador");
+                    textBox_erros_programador.ForeColor = Color.Green;
+                    textBox_erros_programador.Text = "Programador inserido com sucesso!";
                 }
             }
             catch (Exception ex)
             {
-                label_erro_programadores.Text = "Erro: " + ex.Message;
+                textBox_erros_programador.Text = "Erro: " + ex.Message;
             }
         }
 
@@ -259,8 +266,9 @@ namespace iTasks
             {
                 if (ValidGestorBox())
                 {
-
+                    textBox_erros_programador.ForeColor = Color.Red;
                     var controller = new UsersController();
+                    textBox_erros_gestor.Text = "O Gestor " + GestorSelecionado.Nome + " foi Eliminado!";
                     controller.EliminarGestor(GestorSelecionado);
 
                     listagestores = controller.EnumararGestores();
@@ -291,7 +299,8 @@ namespace iTasks
             }
             else
             {
-                MessageBox.Show("Nenhum Gestor selecionado");
+                textBox_erros_programador.ForeColor = Color.Red;
+                textBox_erros_gestor.Text = "Nenhum Programador selecionado!";
             }
         }
 
@@ -302,7 +311,9 @@ namespace iTasks
             {
                 if (ValidProgramadorBox())
                 {
+                    textBox_erros_programador.ForeColor = Color.Red;
                     var controller = new UsersController();
+                    textBox_erros_programador.Text = "O Programador " + ProgramadorSelecionado.Nome + " foi Eliminado!";
                     controller.EliminarProgramador(ProgramadorSelecionado);
 
                     listaprogramadores = controller.EnumararProgramadores();
@@ -318,11 +329,13 @@ namespace iTasks
                     txtUsernameProg.Clear();
                     cbNivelProg.SelectedIndex = -1;
                     cbGestorProg.SelectedIndex = -1;
+
                 }
             }     
             else
             {
-                MessageBox.Show("Nenhum Programador selecionado");
+                textBox_erros_programador.ForeColor = Color.Red;
+                textBox_erros_programador.Text = "Nenhum Programador selecionado!";
             }
 
         }
@@ -490,31 +503,68 @@ namespace iTasks
         private void btnEditarGestor_Click(object sender, EventArgs e)
         {
             Gestor GestorSelecionado = lstListaGestores.SelectedItem as Gestor;
+            textBox_erros_gestor.ForeColor = Color.Red;
+            textBox_erros_gestor.Text = "";
             var controller = new UsersController();
-            string nome = txtNomeGestor.Text;
-            string username = txtUsernameGestor.Text;
-            string pass = txtPasswordGestor.Text;
-            string selectedText = cbDepartamento.SelectedItem.ToString();
-            Departamento departamento = (Departamento)Enum.Parse(typeof(Departamento), selectedText);
-            bool gerirutilizadores = chkGereUtilizadores.Checked;
-            controller.EditarGestor(GestorSelecionado,nome,username,pass, departamento, gerirutilizadores);
-            AtualizarLista("Gestor");
-            
+            try
+            {
+                string nome = txtNomeGestor.Text;
+                string username = txtUsernameGestor.Text;
+                string pass = txtPasswordGestor.Text;
+
+                if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass) || cbDepartamento.SelectedItem == null)
+                {
+                    textBox_erros_gestor.Text = "Preencha todos os campos corretamente!";
+                    return;
+                }
+
+                string selectedText = cbDepartamento.SelectedItem.ToString();
+                Departamento departamento = (Departamento)Enum.Parse(typeof(Departamento), selectedText);
+                bool gerirutilizadores = chkGereUtilizadores.Checked;
+
+                controller.EditarGestor(GestorSelecionado, nome, username, pass, departamento, gerirutilizadores);
+                AtualizarLista("Gestor");
+                textBox_erros_gestor.ForeColor = Color.Green;
+                textBox_erros_gestor.Text = "Gestor atualizado com sucesso!";
+            }
+            catch (Exception ex)
+            {
+                textBox_erros_gestor.Text = "Erro: " + ex.Message;
+            }  
         }
 
         private void btnEditarProg_Click(object sender, EventArgs e)
         {
-
             Programador ProgramadorSelecionado = lstListaProgramadores.SelectedItem as Programador;
+            textBox_erros_programador.ForeColor = Color.Red;
+            textBox_erros_programador.Text = "";
             var controller = new UsersController();
-            string nome = txtNomeProg.Text;
-            string username = txtUsernameProg.Text;
-            string pass = txtPasswordProg.Text;
-            string selectedNivelText = cbNivelProg.SelectedItem.ToString();
-            NivelExperiencia NivelDeExperiencia = (NivelExperiencia)Enum.Parse(typeof(NivelExperiencia), selectedNivelText);
-            Gestor gestorselecionado = (Gestor)cbGestorProg.SelectedItem;
-            controller.EditarProgramador(ProgramadorSelecionado, nome, username, pass, NivelDeExperiencia, gestorselecionado);
-            AtualizarLista("Programador");
+
+            try
+            {
+                string nome = txtNomeProg.Text;
+                string username = txtUsernameProg.Text;
+                string pass = txtPasswordProg.Text;
+
+                if (string.IsNullOrEmpty(nome) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pass) || cbNivelProg.SelectedItem == null || cbGestorProg.SelectedItem == null)
+                {
+                    textBox_erros_programador.Text = "Preencha todos os campos corretamente!";
+                    return;
+                }
+
+                string selectedNivelText = cbNivelProg.SelectedItem.ToString();
+                NivelExperiencia NivelDeExperiencia = (NivelExperiencia)Enum.Parse(typeof(NivelExperiencia), selectedNivelText);
+                Gestor gestorselecionado = (Gestor)cbGestorProg.SelectedItem;
+
+                controller.EditarProgramador(ProgramadorSelecionado, nome, username, pass, NivelDeExperiencia, gestorselecionado);
+                AtualizarLista("Programador");
+                textBox_erros_programador.ForeColor = Color.Green;
+                textBox_erros_programador.Text = "Programador atualizado com sucesso!";
+            }
+            catch (Exception ex)
+            {
+                textBox_erros_programador.Text = "Erro: " + ex.Message;
+            }
           
          }
     }
