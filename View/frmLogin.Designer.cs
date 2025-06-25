@@ -34,6 +34,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btLogin = new System.Windows.Forms.Button();
             this.Infologged = new System.Windows.Forms.Label();
+            this.button_registro = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -93,11 +94,23 @@
             this.Infologged.Size = new System.Drawing.Size(0, 16);
             this.Infologged.TabIndex = 5;
             // 
+            // button_registro
+            // 
+            this.button_registro.Location = new System.Drawing.Point(154, 153);
+            this.button_registro.Margin = new System.Windows.Forms.Padding(4);
+            this.button_registro.Name = "button_registro";
+            this.button_registro.Size = new System.Drawing.Size(100, 28);
+            this.button_registro.TabIndex = 6;
+            this.button_registro.Text = "Registro";
+            this.button_registro.UseVisualStyleBackColor = true;
+            this.button_registro.Click += new System.EventHandler(this.button_registro_Click);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(501, 214);
+            this.Controls.Add(this.button_registro);
             this.Controls.Add(this.Infologged);
             this.Controls.Add(this.btLogin);
             this.Controls.Add(this.txtPassword);
@@ -120,5 +133,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btLogin;
         private System.Windows.Forms.Label Infologged;
+        private System.Windows.Forms.Button button_registro;
     }
 }

@@ -42,5 +42,12 @@ namespace iTasks
             }
 
         }
+
+        private void button_registro_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmGereUtilizadores frmGerirUtilizadores = new frmGereUtilizadores();
+            frmGerirUtilizadores.Show();
+        }
     }
 }
