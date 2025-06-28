@@ -34,7 +34,7 @@ O desenvolvimento desta aplicação foi realizado no âmbito das UCs de **MDS (M
 
 ## 🛠️ Tecnologias Utilizadas
 - Linguagens: **C#**, **SQL**
-- IDE: **Visual Studio Code**
+- **Visual Studio Code**
 - Controlo de versões: **Git**
 
 ## 🧩 Composição do Projeto
