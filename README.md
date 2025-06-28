@@ -16,7 +16,20 @@ Funcionalidades incluídas no Projeto
  - Criação de ficheiro CSV para tarefas concluídas.
  - Listagens de Tarefas Concluídas e por concluir.
 
-Projeto desenvolvimento
+------------------------------------------------------------------------------------------------------
+Composição do Projeto
+
+Metodos criados (4)
+ - Utilizador, com subclasses "Gestor" e "Programador"
+ - TipoTarefa
+ - Tarefa
+ - OrganizacaoContex (Base de Dados)
+
+
+
+
+------------------------------------------------------------------------------------------------------
+Desenvolvimento do Projeto
  - Em c#, sql
  - Visual Code
  - Git
