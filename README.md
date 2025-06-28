@@ -1,11 +1,11 @@
 ## ITask
 
-Elementos do Grupo -> PL1-C
+## Elementos do Grupo -> PL1-C
  - Guilherme Ferreira - 2241869
  - Miguel Ribeiro - 2241595
  - Rafael Campos - 2241594
 
-Objetivo da Aplicação
+### Objetivo da Aplicação
 Esta aplicação permite a gestão de tarefas pelo sistema Kanban, juntamente com a gestão de utilizadores (Gestores e Programadores) e as tarefas apartir de um CRUD. O desenvolvimento desta aplicação foi realizado para cumprir a entrega de um projeto para a UC de MDS (Metodologias de Desenvolvimento de Software) e DA (Desenvolvimento de Aplicações).
 
 Funcionalidades incluídas no Projeto
