@@ -1,6 +1,6 @@
-## ITask
+# ITask
 
-### Elementos do Grupo -> PL1-C
+**`Elementos do Grupo -> PL1-C`**
  - Guilherme Ferreira - 2241869
  - Miguel Ribeiro - 2241595
  - Rafael Campos - 2241594
