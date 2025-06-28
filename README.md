@@ -10,7 +10,7 @@
 - TESP Tecnologias Informáticas  
 
 <p align="left">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Log%C3%B3tipo_Politécnico_Leiria_01.png/320px-Log%C3%B3tipo_Politécnico_Leiria_01.png" alt="Logo do IPL" width="120">
+ <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Log%C3%B3tipo_Politécnico_Leiria_01.png/320px-Log%C3%B3tipo_Politécnico_Leiria_01.png" alt="Logo do IPL" width="120">
 </p>
 
 ---
