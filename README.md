@@ -74,3 +74,10 @@ Caso haja problemas ao executar o projeto:
 
 ---
 
+# Sites Involvidos
+
+### **📈 Jira - https://migueleguilherme.atlassian.net/jira/software/projects/SCRUM/boards/1/timeline?atlOrigin=eyJpIjoiNTdiNjFkOWVjN2U3NDk4NmI4YzVmYjNkNjkyYzhlN2QiLCJwIjoiaiJ9 **
+### **🗃️ GIT - https://github.com/MiguelRibeiro-ipleiria/Projeto_De_Aplicacoes**
+
+
+
