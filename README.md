@@ -15,7 +15,7 @@
 
 # Projeto
 
-## 🎯 Objetivo da Aplicação
+## ✔️ Objetivo da Aplicação
 Esta aplicação permite a gestão de tarefas através do sistema Kanban, juntamente com a gestão de utilizadores (Gestores e Programadores), utilizando operações de CRUD.  
 O desenvolvimento desta aplicação foi realizado no âmbito das UCs de **MDS (Metodologias de Desenvolvimento de Software)** e **DA (Desenvolvimento de Aplicações)**.
 
@@ -32,7 +32,7 @@ O desenvolvimento desta aplicação foi realizado no âmbito das UCs de **MDS (M
   - Concluídas  
   - Por concluir  
 
-## 🛠️ Tecnologias Utilizadas
+## 👨‍💻 Tecnologias Utilizadas
 - Linguagens: **C#**, **SQL**
 - **Visual Studio Code**
 - Controlo de versões: **Git**
