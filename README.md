@@ -6,6 +6,7 @@
  - Rafael Campos - 2241594
 
 **`Objetivo da Aplicação`**
+
 Esta aplicação permite a gestão de tarefas pelo sistema Kanban, juntamente com a gestão de utilizadores (Gestores e Programadores) e as tarefas apartir de um CRUD. O desenvolvimento desta aplicação foi realizado para cumprir a entrega de um projeto para a UC de MDS (Metodologias de Desenvolvimento de Software) e DA (Desenvolvimento de Aplicações).
 
 **`Funcionalidades incluídas no Projeto`**
