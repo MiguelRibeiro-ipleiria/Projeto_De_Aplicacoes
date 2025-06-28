@@ -8,8 +8,8 @@
 ### **Instituição Responsável**
 - IPL (ESTG)  
 - TESP Tecnologias Informáticas
-  
-![Logo do IPL](Properties/DataSources/ued_h-01.png)
+
+
 ---
 
 # Projeto
