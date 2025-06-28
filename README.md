@@ -4,12 +4,20 @@
  - Guilherme Ferreira - 2241869
  - Miguel Ribeiro - 2241595
  - Rafael Campos - 2241594
+   
+**`Instituição responsável`**
+ - IPL (ESTG)
+ - TESP Tecnologias Informáticas
+ - 
+<img src="[https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png](https://upload.wikimedia.org/wikipedia/commons/9/9a/Logótipo_Politécnico_Leiria_01.png)" alt="Logo do IPL" width="50">
 
-**`Objetivo da Aplicação`**
+------------------------------------------------------------------------------------------------------
+# Projeto
 
+## Objetivo da Aplicação
 Esta aplicação permite a gestão de tarefas pelo sistema Kanban, juntamente com a gestão de utilizadores (Gestores e Programadores) e as tarefas apartir de um CRUD. O desenvolvimento desta aplicação foi realizado para cumprir a entrega de um projeto para a UC de MDS (Metodologias de Desenvolvimento de Software) e DA (Desenvolvimento de Aplicações).
 
-**`Funcionalidades incluídas no Projeto`**
+## Funcionalidades incluídas no Projeto 
  - Login e Logout de utilizadores (Gestores e Programadores).
  - Criação, Edição, Leitura e Eleminação de Utilizadores, Tipos de Tarefas e Tarefas.
  - Sistema Kanban com restrições.
@@ -17,23 +25,38 @@ Esta aplicação permite a gestão de tarefas pelo sistema Kanban, juntamente co
  - Criação de ficheiro CSV para tarefas concluídas.
  - Listagens de Tarefas Concluídas e por concluir.
 
-------------------------------------------------------------------------------------------------------
-# Composição do Projeto 
 
-**` Metodos criados (4)`**
+## Aplicações / Tecnlogias 
+ - Em c#, sql
+ - Visual Code
+ - Git
+
+## Composição do Projeto 
+
+**` Metodos Criados (4)`**
  - Utilizador, com subclasses "Gestor" e "Programador"
  - TipoTarefa
  - Tarefa
  - OrganizacaoContex (Base de Dados)
 
+**` Controladores Criados (7)`**
+ - LoginController
+ - KanbanController
+ - TipoTarefaController
+ - TarefasController
+ - UserController
+ - TarefasConcluidasController
+ - TarefasEmCursoController
 
+**` Forms Criados (7)`**
+ - frmLogin
+ - frmKanban
+ - frmGereTipoTarefa
+ - frmDetalhesTarefa
+ - frmGereUtilizadores
+ - frmConsultarTarefasConcluidas
+ - frmConsultaTarefasEmCurso
 
-
-------------------------------------------------------------------------------------------------------
-Desenvolvimento do Projeto
- - Em c#, sql
- - Visual Code
- - Git
 
 Caso haja problemas a dar run ao projeto
  - Executar o .sln da pasta do projeto
