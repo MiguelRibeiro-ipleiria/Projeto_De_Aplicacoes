@@ -8,7 +8,7 @@
 **`Instituição responsável`**
  - IPL (ESTG)
  - TESP Tecnologias Informáticas
- - 
+
 <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fpt.wikipedia.org%2Fwiki%2FFicheiro%3ALog%25C3%25B3tipo_Polit%25C3%25A9cnico_Leiria_01.png&psig=AOvVaw0IY2sprCNN6i5WelBkiaES&ust=1751231273804000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKDGm4GDlY4DFQAAAAAdAAAAABAE" alt="Logo do IPL" width="50">
 
 ------------------------------------------------------------------------------------------------------
