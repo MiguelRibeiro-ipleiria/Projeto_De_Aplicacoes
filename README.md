@@ -9,7 +9,7 @@
 - IPL (ESTG)  
 - TESP Tecnologias Informáticas
   
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Log%C3%B3tipo_Politécnico_Leiria_01.png/320px-Log%C3%B3tipo_Politécnico_Leiria_01.png" alt="Logo do IPL">
+![Logo do IPL](Propreties/DataSources/ued_h-01.png)
 ---
 
 # Projeto
